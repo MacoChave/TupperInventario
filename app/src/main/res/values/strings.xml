@@ -14,4 +14,14 @@
     <string name="familia">Familia</string>
     <string name="categoria">Categoria</string>
     <string name="producto">Producto</string>
+    <string name="nuevo">Nuevo</string>
+    <string name="existencia">Existencia</string>
+    <string name="aumentar_existencia">Aumentar Existencias</string>
+    <string name="restar_existencia">Restar existencia</string>
+    <string name="imagen_producto">Imagen de producto</string>
+    <string name="capacidad">Capacidad</string>
+    <string name="precio">Precio (Q)</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="valor_monetario">00.00</string>
+    <string name="cantidad">0</string>
 </resources>
