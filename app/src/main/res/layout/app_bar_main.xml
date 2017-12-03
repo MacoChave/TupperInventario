@@ -22,6 +22,130 @@
 
     <include layout="@layout/content_main" />
 
+    <LinearLayout
+        android:id="@+id/layoutFamilia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="144dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabFamilia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:srcCompat="@drawable/ic_add_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/familia"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="64dp"
+        android:layout_marginTop="144dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:srcCompat="@drawable/ic_add_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/categoria"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="144dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:srcCompat="@drawable/ic_add_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/color"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="144dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:srcCompat="@drawable/ic_add_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/producto"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="144dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAgregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:srcCompat="@drawable/ic_add_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/nuevo"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

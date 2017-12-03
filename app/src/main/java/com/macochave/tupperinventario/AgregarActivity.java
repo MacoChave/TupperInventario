@@ -109,13 +109,6 @@ public class AgregarActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setItemsSpinner() {
-        /* SPINNER DIMENSIONAL */
-        ArrayAdapter<CharSequence> dimensionalAdapter = ArrayAdapter.createFromResource(
-                this, R.array.dimensional, android.R.layout.simple_spinner_item
-        );
-        dimensionalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnDimensional.setAdapter(dimensionalAdapter);
-
         /* SPINNER FAMILIA */
         /* SPINNER CATEGORIA */
         /* SPINNER PRODUCTO */
