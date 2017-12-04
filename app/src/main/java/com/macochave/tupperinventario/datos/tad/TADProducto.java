@@ -6,24 +6,24 @@ package com.macochave.tupperinventario.datos.tad;
 
 public class TADProducto {
 
-    private int id;
+    private long id;
     private String producto;
     private String path_imagen;
 
     public TADProducto() {
     }
 
-    public TADProducto(int id, String producto, String path_imagen) {
+    public TADProducto(long id, String producto, String path_imagen) {
         this.id = id;
         this.producto = producto;
         this.path_imagen = path_imagen;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

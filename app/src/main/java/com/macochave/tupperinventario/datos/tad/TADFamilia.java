@@ -6,22 +6,22 @@ package com.macochave.tupperinventario.datos.tad;
 
 public class TADFamilia {
 
-    private int id;
+    private long id;
     private String familia;
 
     public TADFamilia() {
     }
 
-    public TADFamilia(int id, String familia) {
+    public TADFamilia(long id, String familia) {
         this.id = id;
         this.familia = familia;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

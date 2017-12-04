@@ -1,6 +1,7 @@
 package com.macochave.tupperinventario.datos.dao;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 
 import com.macochave.tupperinventario.datos.Contrato;
@@ -17,6 +18,10 @@ public class DAOFamilia implements DAO<TADFamilia> {
 
     DBManager manager;
     private ArrayList<TADFamilia> familias;
+
+    public DAOFamilia(Context context) {
+        manager = new DBManager(context);
+    }
 
     @Override
     public ContentValues obtenerValores(TADFamilia item) {
@@ -48,7 +53,7 @@ public class DAOFamilia implements DAO<TADFamilia> {
         long id;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Integer.toString(item.getId())};
+        String[] whereArgs = new String[] {Float.toString(item.getId())};
         id = manager.actualizar("familia", obtenerValores(item), whereClause, whereArgs);
 
         return id;
@@ -59,7 +64,7 @@ public class DAOFamilia implements DAO<TADFamilia> {
         int i;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Integer.toString(item.getId())};
+        String[] whereArgs = new String[] {Float.toString(item.getId())};
         i = manager.eliminar("familia", whereClause, whereArgs);
 
         return i;
@@ -73,7 +78,7 @@ public class DAOFamilia implements DAO<TADFamilia> {
                 "_id", "familia"
         };
         String seleccion = "_id = ?";
-        String[] args = new String[] {Integer.toString(item.getId())};
+        String[] args = new String[] {Float.toString(item.getId())};
         cursor = manager.seleccionar("familia", columnas, seleccion, args);
 
         return 0;

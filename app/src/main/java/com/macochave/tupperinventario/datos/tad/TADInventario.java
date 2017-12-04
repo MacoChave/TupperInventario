@@ -6,10 +6,10 @@ package com.macochave.tupperinventario.datos.tad;
 
 public class TADInventario {
 
-    private int id_familia;
-    private int id_categoria;
-    private int id_color;
-    private int id_producto;
+    private long id_familia;
+    private long id_categoria;
+    private long id_color;
+    private long id_producto;
     private int existencia;
     private double[] capacidad;
     private double precio;
@@ -17,7 +17,7 @@ public class TADInventario {
     public TADInventario() {
     }
 
-    public TADInventario(int id_familia, int id_categoria, int id_color, int id_producto, int existencia, double[] capacidad, double precio) {
+    public TADInventario(long id_familia, long id_categoria, long id_color, long id_producto, int existencia, double[] capacidad, double precio) {
         this.id_familia = id_familia;
         this.id_categoria = id_categoria;
         this.id_color = id_color;
@@ -27,35 +27,35 @@ public class TADInventario {
         this.precio = precio;
     }
 
-    public int getId_familia() {
+    public long getId_familia() {
         return id_familia;
     }
 
-    public void setId_familia(int id_familia) {
+    public void setId_familia(long id_familia) {
         this.id_familia = id_familia;
     }
 
-    public int getId_categoria() {
+    public long getId_categoria() {
         return id_categoria;
     }
 
-    public void setId_categoria(int id_categoria) {
+    public void setId_categoria(long id_categoria) {
         this.id_categoria = id_categoria;
     }
 
-    public int getId_color() {
+    public long getId_color() {
         return id_color;
     }
 
-    public void setId_color(int id_color) {
+    public void setId_color(long id_color) {
         this.id_color = id_color;
     }
 
-    public int getId_producto() {
+    public long getId_producto() {
         return id_producto;
     }
 
-    public void setId_producto(int id_producto) {
+    public void setId_producto(long id_producto) {
         this.id_producto = id_producto;
     }
 

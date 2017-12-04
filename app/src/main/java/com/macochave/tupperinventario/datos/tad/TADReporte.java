@@ -6,7 +6,7 @@ package com.macochave.tupperinventario.datos.tad;
 
 public class TADReporte {
 
-    private int id;
+    private long id;
     private String familia;
     private String categoria;
     private String color;
@@ -18,7 +18,7 @@ public class TADReporte {
     public TADReporte() {
     }
 
-    public TADReporte(int id, String familia, String categoria, String color, String producto, int existencia, double[] capacidad, double precio) {
+    public TADReporte(long id, String familia, String categoria, String color, String producto, int existencia, double[] capacidad, double precio) {
         this.id = id;
         this.familia = familia;
         this.categoria = categoria;
@@ -29,11 +29,11 @@ public class TADReporte {
         this.precio = precio;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -6,22 +6,22 @@ package com.macochave.tupperinventario.datos.tad;
 
 public class TADCategoria {
 
-    private int id;
+    private long id;
     private String categoria;
 
     public TADCategoria() {
     }
 
-    public TADCategoria(int id, String categoria) {
+    public TADCategoria(long id, String categoria) {
         this.id = id;
         this.categoria = categoria;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
