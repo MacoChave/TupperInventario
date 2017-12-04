@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,8 +20,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.macochave.tupperinventario.datos.DBManager;
+import com.macochave.tupperinventario.datos.tad.TADFamilia;
+import com.macochave.tupperinventario.dialog.FamiliaDialog;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FamiliaDialog.NoticeFamiliaDialogListener {
 
     private FloatingActionButton fab;
     private LinearLayout layoutFamilia, layoutCategoria, layoutColor, layoutProducto, layoutRegistro;
@@ -119,12 +124,8 @@ public class MainActivity extends AppCompatActivity
         switch (i)
         {
             case 0: // FAMILIA
-                builder = new AlertDialog.Builder(this);
-                builder.setMessage("Aquí se ingresarán las familias");
-                builder.setTitle("Agregar familias");
-
-                dialog = builder.create();
-                dialog.show();
+                DialogFragment familiaDialogo = new FamiliaDialog();
+                familiaDialogo.show(getSupportFragmentManager(), "Nueva familia");
                 break;
             case 1: // CATEGORIA
                 builder = new AlertDialog.Builder(this);
@@ -246,5 +247,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void respuesta(TADFamilia familia) {
+
     }
 }
