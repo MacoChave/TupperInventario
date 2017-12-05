@@ -37,7 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:elevation="0dp"
-            app:srcCompat="@drawable/ic_add_white" />
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_familia" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,7 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:elevation="0dp"
-            app:srcCompat="@drawable/ic_add_white" />
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_categoria" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,7 +89,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:elevation="0dp"
-            app:srcCompat="@drawable/ic_add_white" />
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_color" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -112,7 +115,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:elevation="0dp"
-            app:srcCompat="@drawable/ic_add_white" />
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_producto" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -136,6 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:elevation="0dp"
+            app:fabSize="normal"
             app:srcCompat="@drawable/ic_add_white" />
 
         <TextView
@@ -152,6 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        app:fabSize="normal"
         app:srcCompat="@drawable/ic_add_white" />
 
 </android.support.design.widget.CoordinatorLayout>
