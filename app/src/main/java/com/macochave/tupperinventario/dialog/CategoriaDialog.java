@@ -13,68 +13,68 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
-import com.macochave.tupperinventario.datos.dao.DAOFamilia;
-import com.macochave.tupperinventario.datos.tad.TADFamilia;
+import com.macochave.tupperinventario.datos.dao.DAOCategoria;
+import com.macochave.tupperinventario.datos.tad.TADCategoria;
 
 /**
- * Created by marco on 3/12/17.
+ * Created by marco on 5/12/17.
  */
 
-public class FamiliaDialog extends DialogFragment {
+public class CategoriaDialog extends DialogFragment {
 
-    FamiliaDialogListener listener;
+    CategoriaDialogListener listener;
 
-    public interface FamiliaDialogListener {
-        void respuesta(TADFamilia familia);
+    public interface CategoriaDialogListener {
+        void respuesta(TADCategoria categoria);
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.nueva_familia);
+        builder.setTitle(R.string.nueva_categoria);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_familia, null);
+        View view = inflater.inflate(R.layout.dialog_categoria, null);
 
-        final EditText edtFamilia = view.findViewById(R.id.edtDialog_Familia);
+        final EditText edtCategoria = view.findViewById(R.id.edtDialog_Categoria);
 
         builder.setView(view);
-
         builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (validarTexto(edtFamilia.getText().toString()))
+                if (validarTexto(edtCategoria.getText().toString()))
                     Toast.makeText(getContext(), "No admito entradas vacías :)", Toast.LENGTH_SHORT).show();
                 else
-                    agregar(edtFamilia.getText().toString());
+                    agregar(edtCategoria.getText().toString());
             }
         });
+        builder.setView(view);
         builder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FamiliaDialog.this.getDialog().cancel();
+                CategoriaDialog.this.getDialog().cancel();
             }
         });
 
         return builder.create();
     }
 
-    private boolean validarTexto(String s) {
-        return s.matches("( )+") || s.isEmpty();
+    private void agregar(String s) {
+        DAOCategoria daoCategoria = new DAOCategoria(getContext());
+        TADCategoria categoria = new TADCategoria(0, s);
+        categoria.setId(daoCategoria.obtenerID(categoria));
+
+        if (categoria.getId() > 0)
+            daoCategoria.actualizar(categoria);
+        else
+            daoCategoria.agregar(categoria);
+
+        listener.respuesta(categoria);
     }
 
-    private void agregar(String s) {
-        DAOFamilia daoFamilia = new DAOFamilia(getContext());
-        TADFamilia familia = new TADFamilia(0, s);
-        familia.setId(daoFamilia.obtenerID(familia));
-
-        if (familia.getId() > 0)
-            daoFamilia.actualizar(familia);
-        else
-            daoFamilia.agregar(familia);
-
-        listener.respuesta(familia);
+    private boolean validarTexto(String s) {
+        return s.matches("( )+") || s.isEmpty();
     }
 
     @Override
@@ -82,11 +82,12 @@ public class FamiliaDialog extends DialogFragment {
         super.onAttach(context);
 
         try {
-            listener = (FamiliaDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " debería implementar FamiliaDialogListener");
+            listener = (CategoriaDialogListener) context;
         }
-
+        catch (ClassCastException e)
+        {
+            throw new ClassCastException(context.toString()
+            + " debería implementar CategoriaDialogListener");
+        }
     }
 }

@@ -1,11 +1,8 @@
 package com.macochave.tupperinventario;
 
-import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,12 +17,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.macochave.tupperinventario.datos.DBManager;
+import com.macochave.tupperinventario.datos.tad.TADCategoria;
 import com.macochave.tupperinventario.datos.tad.TADFamilia;
+import com.macochave.tupperinventario.dialog.CategoriaDialog;
 import com.macochave.tupperinventario.dialog.FamiliaDialog;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FamiliaDialog.NoticeFamiliaDialogListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        FamiliaDialog.FamiliaDialogListener, CategoriaDialog.CategoriaDialogListener {
 
     private FloatingActionButton fab;
     private LinearLayout layoutFamilia, layoutCategoria, layoutColor, layoutProducto, layoutRegistro;
@@ -118,46 +116,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void accion(int i) {
-        final AlertDialog.Builder builder;
-        final AlertDialog dialog;
-        View viewDialog;
+        DialogFragment fragment;
         switch (i)
         {
             case 0: // FAMILIA
-                DialogFragment familiaDialogo = new FamiliaDialog();
-                familiaDialogo.show(getSupportFragmentManager(), "Nueva familia");
+                fragment = new FamiliaDialog();
+                fragment.show(getSupportFragmentManager(), "Nueva familia");
                 break;
             case 1: // CATEGORIA
-                builder = new AlertDialog.Builder(this);
-                builder.setMessage("Aquí se ingresarán las categorias");
-                builder.setTitle("Agregar Categoria");
-
-                dialog = builder.create();
-                dialog.show();
+                fragment = new CategoriaDialog();
+                fragment.show(getSupportFragmentManager(), "Nueva categoria");
                 break;
             case 2: // COLOR
-                builder = new AlertDialog.Builder(this);
-                builder.setMessage("Aquí se ingresarán los colores");
-                builder.setTitle("Agregar Color");
 
-                dialog = builder.create();
-                dialog.show();
                 break;
             case 3: // PRODUCTO
-                builder = new AlertDialog.Builder(this);
-                builder.setMessage("Aquí se ingresarán los productos");
-                builder.setTitle("Agregar Producto");
 
-                dialog = builder.create();
-                dialog.show();
                 break;
             case 4: // REGISTRO
-                builder = new AlertDialog.Builder(this);
-                builder.setMessage("Aquí se ingresarán los registros");
-                builder.setTitle("Agregar Registro");
 
-                dialog = builder.create();
-                dialog.show();
                 break;
             default:
                 break;
@@ -251,6 +228,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void respuesta(TADFamilia familia) {
+
+    }
+
+    @Override
+    public void respuesta(TADCategoria categoria) {
 
     }
 }

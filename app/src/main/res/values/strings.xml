@@ -21,8 +21,15 @@
     <string name="imagen_producto">Imagen de producto</string>
     <string name="capacidad">Capacidad</string>
     <string name="precio">Precio (Q)</string>
-    <string name="aceptar">Aceptar</string>
     <string name="valor_monetario">00.00</string>
     <string name="cantidad">0</string>
     <string name="color">Color</string>
+
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+
+    <string name="nueva_familia">Nueva familia</string>
+    <string name="nueva_categoria">Nueva categoria</string>
+    <string name="nuevo_color">Nuevo color</string>
+    <string name="nuevo_producto">Nuevo producto</string>
 </resources>

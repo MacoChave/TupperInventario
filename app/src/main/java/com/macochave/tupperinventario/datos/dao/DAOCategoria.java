@@ -6,91 +6,91 @@ import android.database.Cursor;
 
 import com.macochave.tupperinventario.datos.Contrato;
 import com.macochave.tupperinventario.datos.DBManager;
-import com.macochave.tupperinventario.datos.tad.TADFamilia;
+import com.macochave.tupperinventario.datos.tad.TADCategoria;
 
 import java.util.ArrayList;
 
 /**
- * Created by marco on 1/12/17.
+ * Created by marco on 5/12/17.
  */
 
-public class DAOFamilia implements DAO<TADFamilia> {
+public class DAOCategoria implements DAO<TADCategoria> {
 
     DBManager manager;
-    private ArrayList<TADFamilia> familias;
+    ArrayList<TADCategoria> categorias;
 
-    public DAOFamilia(Context context) {
+    public DAOCategoria(Context context) {
         manager = new DBManager(context);
     }
 
     @Override
-    public ContentValues obtenerValores(TADFamilia item) {
+    public ContentValues obtenerValores(TADCategoria item) {
         ContentValues values = new ContentValues();
-        values.put(Contrato.Familia.FAMILIA, item.getFamilia());
+        values.put(Contrato.Categoria.CATEGORIA, item.getCategoria());
 
         return values;
     }
 
     @Override
-    public long agregar(TADFamilia item) {
-        return manager.insertar("familia", null, obtenerValores(item));
+    public long agregar(TADCategoria item) {
+        return manager.insertar("categoria", null, obtenerValores(item));
     }
 
     @Override
-    public ArrayList<TADFamilia> seleccionarTodo() {
-        familias = new ArrayList<>();
+    public ArrayList<TADCategoria> seleccionarTodo() {
+        categorias = new ArrayList<>();
         Cursor cursor;
         String[] columnas = new String[]{
-                "_id", "familia"
+                "_id", "categoria"
         };
-        cursor = manager.seleccionar("familia", columnas, null, null);
+        cursor = manager.seleccionar("categoria", columnas, null, null);
 
         if (cursor.moveToFirst())
         {
             do {
-                TADFamilia familia = new TADFamilia();
-                familia.setId(cursor.getInt(0));
-                familia.setFamilia(cursor.getString(1));
+                TADCategoria categoria = new TADCategoria();
+                categoria.setId(cursor.getInt(0));
+                categoria.setCategoria(cursor.getString(1));
 
-                familias.add(familia);
+                categorias.add(categoria);
             } while (cursor.moveToNext());
         }
 
-        return familias;
+        return categorias;
     }
 
     @Override
-    public long actualizar(TADFamilia item) {
+    public long actualizar(TADCategoria item) {
         long id;
 
         String whereClause = "_id = ?";
         String[] whereArgs = new String[] {Float.toString(item.getId())};
-        id = manager.actualizar("familia", obtenerValores(item), whereClause, whereArgs);
+        id = manager.actualizar("categoria", obtenerValores(item), whereClause, whereArgs);
 
         return id;
     }
 
     @Override
-    public int eliminar(TADFamilia item) {
+    public int eliminar(TADCategoria item) {
         int i;
 
         String whereClause = "_id = ?";
         String[] whereArgs = new String[] {Float.toString(item.getId())};
-        i = manager.eliminar("familia", whereClause, whereArgs);
+        i = manager.eliminar("categoria", whereClause, whereArgs);
 
         return i;
     }
 
     @Override
-    public long obtenerID(TADFamilia item) {
+    public long obtenerID(TADCategoria item) {
         Cursor cursor;
 
         String[] columnas = new String[]{
-                "_id", "familia"
+                "_id", "categoria"
         };
         String seleccion = "_id = ?";
         String[] args = new String[] {Float.toString(item.getId())};
-        cursor = manager.seleccionar("familia", columnas, seleccion, args);
+        cursor = manager.seleccionar("categoria", columnas, seleccion, args);
 
         long id = 0;
 
