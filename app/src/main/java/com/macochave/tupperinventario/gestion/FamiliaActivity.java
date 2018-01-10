@@ -7,6 +7,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,9 +28,10 @@ import com.macochave.tupperinventario.dialog.FamiliaDialog;
 
 import java.util.ArrayList;
 
-public class FamiliaActivity extends AppCompatActivity implements FamiliaDialog.FamiliaDialogListener {
+public class FamiliaActivity extends AppCompatActivity
+        implements FamiliaDialog.FamiliaDialogListener {
 
-    private ListView listView;
+    private RecyclerView listView;
     private ArrayList<TADFamilia> familias;
     private DAOFamilia daoFamilia;
     private AdaptadorFamilia adaptadorFamilia;
@@ -46,19 +51,18 @@ public class FamiliaActivity extends AppCompatActivity implements FamiliaDialog.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                familia = new TADFamilia();
                 nuevaFamilia();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = findViewById(R.id.lst_familia);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                familia = (TADFamilia) adaptadorFamilia.getItem(i);
-                nuevaFamilia();
-            }
-        });
+
+        listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        listView.setItemAnimator(new DefaultItemAnimator());
 
         daoFamilia = new DAOFamilia(getApplicationContext());
 
@@ -67,14 +71,22 @@ public class FamiliaActivity extends AppCompatActivity implements FamiliaDialog.
 
     private void llenarLista() {
         familias = daoFamilia.seleccionarTodo();
-        adaptadorFamilia = new AdaptadorFamilia(familias, getApplicationContext());
+        adaptadorFamilia = new AdaptadorFamilia(familias);
         listView.setAdapter(adaptadorFamilia);
+
+        adaptadorFamilia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                familia = familias.get(listView.getChildAdapterPosition(view));
+                nuevaFamilia();
+            }
+        });
     }
 
     private void limpiarLista() {
         familias.clear();
         adaptadorFamilia = null;
-        listView.setAdapter(adaptadorFamilia);
+        listView.setAdapter(null);
     }
 
     private void nuevaFamilia() {
@@ -85,10 +97,8 @@ public class FamiliaActivity extends AppCompatActivity implements FamiliaDialog.
 
     @Override
     public void possitiveFamilia(TADFamilia familia) {
-        if (familia != null)
-        {
-            limpiarLista();
-            llenarLista();
-        }
+        limpiarLista();
+        llenarLista();
     }
+
 }

@@ -10,6 +10,8 @@ public class TADFamilia {
     private String familia;
 
     public TADFamilia() {
+        id = 0;
+        familia = "";
     }
 
     public TADFamilia(long id, String familia) {

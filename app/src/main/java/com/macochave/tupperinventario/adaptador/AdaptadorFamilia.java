@@ -1,11 +1,9 @@
 package com.macochave.tupperinventario.adaptador;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.macochave.tupperinventario.R;
@@ -17,9 +15,65 @@ import java.util.ArrayList;
  * Created by marco on 9/01/18.
  */
 
-public class AdaptadorFamilia extends BaseAdapter {
+public class AdaptadorFamilia extends RecyclerView.Adapter<AdaptadorFamilia.FamiliaViewHolder>
+        implements View.OnClickListener {
 
     private ArrayList<TADFamilia> familias;
+
+    private View.OnClickListener listener;
+
+    public static class FamiliaViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView item;
+
+        public FamiliaViewHolder(View itemView) {
+            super(itemView);
+
+            item = itemView.findViewById(R.id.txt_familia);
+        }
+        public void bindFamilia(TADFamilia familia)
+        {
+            item.setText(familia.getFamilia());
+        }
+
+    }
+
+    public AdaptadorFamilia(ArrayList<TADFamilia> familias) {
+        this.familias = familias;
+    }
+
+    @Override
+    public FamiliaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_familia, parent, false);
+
+        view.setOnClickListener(this);
+
+        return new FamiliaViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(FamiliaViewHolder holder, int position) {
+        TADFamilia familia = familias.get(position);
+        holder.bindFamilia(familia);
+    }
+
+    @Override
+    public int getItemCount() {
+        return familias.size();
+    }
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(listener != null)
+            listener.onClick(view);
+    }
+
+    /*
     private Context context;
 
     public AdaptadorFamilia(ArrayList<TADFamilia> familias, Context context) {
@@ -54,4 +108,5 @@ public class AdaptadorFamilia extends BaseAdapter {
 
         return v;
     }
+*/
 }

@@ -40,7 +40,13 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_familia" />
+    <!--<include layout="@layout/content_familia" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lst_familia"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_familia"
