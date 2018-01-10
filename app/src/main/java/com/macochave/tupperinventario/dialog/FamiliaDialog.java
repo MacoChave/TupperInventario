@@ -22,10 +22,12 @@ import com.macochave.tupperinventario.datos.tad.TADFamilia;
 
 public class FamiliaDialog extends DialogFragment {
 
+    private TADFamilia familia;
+
     FamiliaDialogListener listener;
 
     public interface FamiliaDialogListener {
-        void respuesta(TADFamilia familia);
+        void possitiveFamilia(TADFamilia familia);
     }
 
     @NonNull
@@ -38,9 +40,12 @@ public class FamiliaDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_familia, null);
 
         final EditText edtFamilia = view.findViewById(R.id.edtDialog_Familia);
+        if (familia != null)
+            edtFamilia.setText(familia.getFamilia());
+        else
+            familia = new TADFamilia();
 
         builder.setView(view);
-
         builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -66,15 +71,14 @@ public class FamiliaDialog extends DialogFragment {
 
     private void agregar(String s) {
         DAOFamilia daoFamilia = new DAOFamilia(getContext());
-        TADFamilia familia = new TADFamilia(0, s);
-        familia.setId(daoFamilia.obtenerID(familia));
+        familia.setFamilia(s);
 
         if (familia.getId() > 0)
             daoFamilia.actualizar(familia);
         else
             daoFamilia.agregar(familia);
 
-        listener.respuesta(familia);
+        listener.possitiveFamilia(familia);
     }
 
     @Override
@@ -88,5 +92,10 @@ public class FamiliaDialog extends DialogFragment {
                     + " debería implementar FamiliaDialogListener");
         }
 
+    }
+
+    public void setFamilia(TADFamilia familia)
+    {
+        this.familia = familia;
     }
 }

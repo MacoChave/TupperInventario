@@ -86,7 +86,7 @@ public class DAOCategoria implements DAO<TADCategoria> {
         Cursor cursor;
 
         String[] columnas = new String[]{
-                "_id", "categoria"
+                "_id"
         };
         String seleccion = "_id = ?";
         String[] args = new String[] {Float.toString(item.getId())};

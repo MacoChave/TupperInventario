@@ -22,7 +22,14 @@
                 android:id="@+id/nav_producto"
                 android:icon="@drawable/ic_edit_black"
                 android:title="@string/producto" />
+            <item
+                android:id="@+id/nav_color"
+                android:icon="@drawable/ic_edit_black"
+                android:title="@string/color" />
+            <item
+                android:id="@+id/nav_registro"
+                android:icon="@drawable/ic_edit_black"
+                android:title="@string/registro" />
         </menu>
     </item>
-
 </menu>

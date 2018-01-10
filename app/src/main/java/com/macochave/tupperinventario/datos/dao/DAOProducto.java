@@ -6,7 +6,7 @@ import android.database.Cursor;
 
 import com.macochave.tupperinventario.datos.Contrato;
 import com.macochave.tupperinventario.datos.DBManager;
-import com.macochave.tupperinventario.datos.tad.TADColor;
+import com.macochave.tupperinventario.datos.tad.TADProducto;
 
 import java.util.ArrayList;
 
@@ -14,75 +14,77 @@ import java.util.ArrayList;
  * Created by marco on 5/12/17.
  */
 
-public class DAOColor implements DAO<TADColor> {
+public class DAOProducto implements DAO<TADProducto> {
 
     DBManager manager;
-    ArrayList<TADColor> colors;
+    ArrayList<TADProducto> productos;
 
-    public DAOColor(Context context) {
+    public DAOProducto(Context context) {
         manager = new DBManager(context);
     }
 
     @Override
-    public ContentValues obtenerValores(TADColor item) {
+    public ContentValues obtenerValores(TADProducto item) {
         ContentValues values = new ContentValues();
-        values.put(Contrato.Color.COLOR, item.getColor());
+        values.put(Contrato.Producto.PRODUCTO, item.getProducto());
+        values.put(Contrato.Producto.PATH_IMAGEN, item.getPath_imagen());
 
         return values;
     }
 
     @Override
-    public long agregar(TADColor item) {
-        return manager.insertar("color", null, obtenerValores(item));
+    public long agregar(TADProducto item) {
+        return manager.insertar("producto", null, obtenerValores(item));
     }
 
     @Override
-    public ArrayList<TADColor> seleccionarTodo() {
-        colors = new ArrayList<>();
+    public ArrayList<TADProducto> seleccionarTodo() {
+        productos = new ArrayList<>();
         Cursor cursor;
         String[] columnas = new String[]{
-                "_id", "color"
+                "_id", "producto", "path_imagen"
         };
-        cursor = manager.seleccionar("color", columnas, null, null);
+        cursor = manager.seleccionar("producto", columnas, null, null);
 
         if (cursor.moveToFirst())
         {
             do {
-                TADColor familia = new TADColor();
-                familia.setId(cursor.getInt(0));
-                familia.setColor(cursor.getString(1));
+                TADProducto producto = new TADProducto();
+                producto.setId(cursor.getInt(0));
+                producto.setProducto(cursor.getString(1));
+                producto.setPath_imagen(cursor.getString(2));
 
-                colors.add(familia);
+                productos.add(producto);
             } while (cursor.moveToNext());
         }
 
-        return colors;
+        return productos;
     }
 
     @Override
-    public long actualizar(TADColor item) {
+    public long actualizar(TADProducto item) {
         long id;
 
         String whereClause = "_id = ?";
         String[] whereArgs = new String[] {Float.toString(item.getId())};
-        id = manager.actualizar("color", obtenerValores(item), whereClause, whereArgs);
+        id = manager.actualizar("producto", obtenerValores(item), whereClause, whereArgs);
 
         return id;
     }
 
     @Override
-    public int eliminar(TADColor item) {
+    public int eliminar(TADProducto item) {
         int i;
 
         String whereClause = "_id = ?";
         String[] whereArgs = new String[] {Float.toString(item.getId())};
-        i = manager.eliminar("color", whereClause, whereArgs);
+        i = manager.eliminar("producto", whereClause, whereArgs);
 
         return i;
     }
 
     @Override
-    public long obtenerID(TADColor item) {
+    public long obtenerID(TADProducto item) {
         Cursor cursor;
 
         String[] columnas = new String[]{
@@ -90,7 +92,7 @@ public class DAOColor implements DAO<TADColor> {
         };
         String seleccion = "_id = ?";
         String[] args = new String[] {Float.toString(item.getId())};
-        cursor = manager.seleccionar("color", columnas, seleccion, args);
+        cursor = manager.seleccionar("producto", columnas, seleccion, args);
 
         long id = 0;
 

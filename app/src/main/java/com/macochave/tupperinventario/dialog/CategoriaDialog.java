@@ -22,10 +22,12 @@ import com.macochave.tupperinventario.datos.tad.TADCategoria;
 
 public class CategoriaDialog extends DialogFragment {
 
+    private TADCategoria categoria;
+    
     CategoriaDialogListener listener;
 
     public interface CategoriaDialogListener {
-        void respuesta(TADCategoria categoria);
+        void possitiveCategoria(TADCategoria categoria);
     }
 
     @NonNull
@@ -70,7 +72,7 @@ public class CategoriaDialog extends DialogFragment {
         else
             daoCategoria.agregar(categoria);
 
-        listener.respuesta(categoria);
+        listener.possitiveCategoria(categoria);
     }
 
     private boolean validarTexto(String s) {
@@ -89,5 +91,10 @@ public class CategoriaDialog extends DialogFragment {
             throw new ClassCastException(context.toString()
             + " debería implementar CategoriaDialogListener");
         }
+    }
+
+    public void setCategoria(TADCategoria categoria)
+    {
+
     }
 }

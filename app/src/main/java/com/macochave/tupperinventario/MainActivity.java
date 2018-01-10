@@ -1,8 +1,9 @@
 package com.macochave.tupperinventario;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,22 +13,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.macochave.tupperinventario.datos.Contrato;
 import com.macochave.tupperinventario.datos.tad.TADCategoria;
+import com.macochave.tupperinventario.datos.tad.TADColor;
 import com.macochave.tupperinventario.datos.tad.TADFamilia;
+import com.macochave.tupperinventario.datos.tad.TADReporte;
 import com.macochave.tupperinventario.dialog.CategoriaDialog;
+import com.macochave.tupperinventario.dialog.ColorDialog;
 import com.macochave.tupperinventario.dialog.FamiliaDialog;
+import com.macochave.tupperinventario.dialog.NuevoRegistro;
+import com.macochave.tupperinventario.gestion.FamiliaActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        FamiliaDialog.FamiliaDialogListener, CategoriaDialog.CategoriaDialogListener {
-
-    private FloatingActionButton fab;
-    private LinearLayout layoutFamilia, layoutCategoria, layoutColor, layoutProducto, layoutRegistro;
-    private boolean abierto = false;
+        FamiliaDialog.FamiliaDialogListener, CategoriaDialog.CategoriaDialogListener,
+        ColorDialog.ColorDialogListener, NuevoRegistro.NuevoRegistroListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,74 +37,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fab = findViewById(R.id.fab);
-        FloatingActionButton fabFamilia = findViewById(R.id.fabFamilia);
-        FloatingActionButton fabCategoria = findViewById(R.id.fabCategoria);
-        FloatingActionButton fabColor = findViewById(R.id.fabColor);
-        FloatingActionButton fabProducto = findViewById(R.id.fabProducto);
-        FloatingActionButton fabAgregar = findViewById(R.id.fabAgregar);
-
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (abierto)
-                {
-                    animacionAbrir();
-                    abierto = !abierto;
-                }
-                else
-                {
-                    animacionCerrar();
-                    abierto = !abierto;
-                }
+                nuevoRegistro();
             }
         });
-        fabFamilia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animacionCerrar();
-                accion(0);
-                abierto = !abierto;
-            }
-        });
-        fabCategoria.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animacionCerrar();
-                accion(1);
-                abierto = !abierto;
-            }
-        });
-        fabColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animacionCerrar();
-                accion(2);
-                abierto = !abierto;
-            }
-        });
-        fabProducto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animacionCerrar();
-                accion(3);
-                abierto = !abierto;
-            }
-        });
-        fabAgregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animacionCerrar();
-                accion(4);
-                abierto = !abierto;
-            }
-        });
-
-        layoutFamilia = findViewById(R.id.layoutFamilia);
-        layoutCategoria = findViewById(R.id.layoutCategoria);
-        layoutColor = findViewById(R.id.layoutColor);
-        layoutProducto = findViewById(R.id.layoutProducto);
-        layoutRegistro = findViewById(R.id.layoutRegistro);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -115,54 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void accion(int i) {
-        DialogFragment fragment;
-        switch (i)
-        {
-            case 0: // FAMILIA
-                fragment = new FamiliaDialog();
-                fragment.show(getSupportFragmentManager(), "Nueva familia");
-                break;
-            case 1: // CATEGORIA
-                fragment = new CategoriaDialog();
-                fragment.show(getSupportFragmentManager(), "Nueva categoria");
-                break;
-            case 2: // COLOR
-
-                break;
-            case 3: // PRODUCTO
-
-                break;
-            case 4: // REGISTRO
-
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void animacionAbrir() {
-        Animation rotar = AnimationUtils.loadAnimation(this, R.anim.rotar_antihorario);
-        Animation abrir = AnimationUtils.loadAnimation(this, R.anim.fab_abrir);
-
-        fab.startAnimation(rotar);
-        layoutFamilia.startAnimation(abrir);
-        layoutCategoria.startAnimation(abrir);
-        layoutColor.startAnimation(abrir);
-        layoutProducto.startAnimation(abrir);
-        layoutRegistro.startAnimation(abrir);
-    }
-
-    private void animacionCerrar() {
-        Animation rotar = AnimationUtils.loadAnimation(this, R.anim.rotar_horario);
-        Animation cerrar = AnimationUtils.loadAnimation(this, R.anim.fab_cerrar);
-
-        fab.startAnimation(rotar);
-        layoutFamilia.startAnimation(cerrar);
-        layoutCategoria.startAnimation(cerrar);
-        layoutColor.startAnimation(cerrar);
-        layoutProducto.startAnimation(cerrar);
-        layoutRegistro.startAnimation(cerrar);
+    private void nuevoRegistro() {
+        NuevoRegistro dialog = new NuevoRegistro();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        dialog.show(transaction, NuevoRegistro.TAG);
     }
 
     @Override
@@ -170,12 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-
-            if (abierto)
-            {
-                animacionCerrar();
-                abierto = !abierto;
-            }
         } else {
             super.onBackPressed();
         }
@@ -191,11 +81,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_ayuda:
+            case R.id.action_tienda:
+                Toast.makeText(this, "Próximamente una tiendita :)", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_actualizar:
+                Toast.makeText(this, "Aún no puedo verificar actualizaciones :(", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.action_info:
+            case R.id.action_ayuda:
+                Toast.makeText(this, "Ayuda en construcción :D", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_acerca:
                 Toast.makeText(this,"TupperInventario - " + BuildConfig.VERSION_NAME, Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -212,10 +107,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_reporte:
                 break;
             case R.id.nav_familia:
+                Intent intent = new Intent(MainActivity.this, FamiliaActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_categoria:
                 break;
             case R.id.nav_producto:
+                break;
+            case R.id.nav_color:
                 break;
             default:
                 break;
@@ -227,12 +126,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void respuesta(TADFamilia familia) {
+    public void possitiveColor(TADColor color) {
 
     }
 
     @Override
-    public void respuesta(TADCategoria categoria) {
+    public void possitiveFamilia(TADFamilia familia) {
+
+    }
+
+    @Override
+    public void possitiveCategoria(TADCategoria categoria) {
+
+    }
+
+    @Override
+    public void possitiveNuevoRegistro(TADReporte reporte) {
 
     }
 }

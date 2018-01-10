@@ -86,7 +86,7 @@ public class DAOFamilia implements DAO<TADFamilia> {
         Cursor cursor;
 
         String[] columnas = new String[]{
-                "_id", "familia"
+                "_id"
         };
         String seleccion = "_id = ?";
         String[] args = new String[] {Float.toString(item.getId())};
