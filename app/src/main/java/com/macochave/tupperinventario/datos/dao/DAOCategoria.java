@@ -45,8 +45,7 @@ public class DAOCategoria implements DAO<TADCategoria> {
         };
         cursor = manager.seleccionar("categoria", columnas, null, null);
 
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 TADCategoria categoria = new TADCategoria();
                 categoria.setId(cursor.getInt(0));
@@ -64,7 +63,7 @@ public class DAOCategoria implements DAO<TADCategoria> {
         long id;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Float.toString(item.getId())};
+        String[] whereArgs = new String[]{Float.toString(item.getId())};
         id = manager.actualizar("categoria", obtenerValores(item), whereClause, whereArgs);
 
         return id;
@@ -75,7 +74,7 @@ public class DAOCategoria implements DAO<TADCategoria> {
         int i;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Float.toString(item.getId())};
+        String[] whereArgs = new String[]{Float.toString(item.getId())};
         i = manager.eliminar("categoria", whereClause, whereArgs);
 
         return i;
@@ -89,7 +88,7 @@ public class DAOCategoria implements DAO<TADCategoria> {
                 "_id"
         };
         String seleccion = "_id = ?";
-        String[] args = new String[] {Float.toString(item.getId())};
+        String[] args = new String[]{Float.toString(item.getId())};
         cursor = manager.seleccionar("categoria", columnas, seleccion, args);
 
         long id = 0;

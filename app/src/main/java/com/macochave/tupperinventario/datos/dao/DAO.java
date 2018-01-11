@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by marco on 1/12/17.
  */
 
-interface DAO <T>{
+interface DAO<T> {
     /*
      * C-REATE  -> long - T
      * R-EAD    -> ArrayList<T> -
@@ -16,9 +16,14 @@ interface DAO <T>{
      * D-ELETE  -> long - T
      */
     ContentValues obtenerValores(T item);
+
     long agregar(T item);
+
     ArrayList<T> seleccionarTodo();
+
     long actualizar(T item);
+
     int eliminar(T item);
+
     long obtenerID(T item);
 }

@@ -22,13 +22,8 @@ import com.macochave.tupperinventario.datos.tad.TADCategoria;
 
 public class CategoriaDialog extends DialogFragment {
 
-    private TADCategoria categoria;
-    
     CategoriaDialogListener listener;
-
-    public interface CategoriaDialogListener {
-        void possitiveCategoria(TADCategoria categoria);
-    }
+    private TADCategoria categoria;
 
     @NonNull
     @Override
@@ -40,6 +35,8 @@ public class CategoriaDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_categoria, null);
 
         final EditText edtCategoria = view.findViewById(R.id.edtDialog_Categoria);
+        if (categoria.getId() > 0)
+            edtCategoria.setText(categoria.getCategoria());
 
         builder.setView(view);
         builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
@@ -51,21 +48,34 @@ public class CategoriaDialog extends DialogFragment {
                     agregar(edtCategoria.getText().toString());
             }
         });
-        builder.setView(view);
         builder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 CategoriaDialog.this.getDialog().cancel();
             }
         });
+        builder.setNeutralButton(R.string.eliminar, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (categoria.getId() > 0)
+                    eliminar();
+            }
+        });
 
         return builder.create();
     }
 
+    private void eliminar() {
+        DAOCategoria daoCategoria = new DAOCategoria(getContext());
+        daoCategoria.eliminar(categoria);
+
+        listener.possitiveCategoria(null);
+    }
+
     private void agregar(String s) {
         DAOCategoria daoCategoria = new DAOCategoria(getContext());
-        TADCategoria categoria = new TADCategoria(0, s);
-        categoria.setId(daoCategoria.obtenerID(categoria));
+        categoria.setCategoria(s);
 
         if (categoria.getId() > 0)
             daoCategoria.actualizar(categoria);
@@ -85,16 +95,17 @@ public class CategoriaDialog extends DialogFragment {
 
         try {
             listener = (CategoriaDialogListener) context;
-        }
-        catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-            + " debería implementar CategoriaDialogListener");
+                    + " debería implementar CategoriaDialogListener");
         }
     }
 
-    public void setCategoria(TADCategoria categoria)
-    {
+    public void setCategoria(TADCategoria categoria) {
+        this.categoria = categoria;
+    }
 
+    public interface CategoriaDialogListener {
+        void possitiveCategoria(TADCategoria categoria);
     }
 }

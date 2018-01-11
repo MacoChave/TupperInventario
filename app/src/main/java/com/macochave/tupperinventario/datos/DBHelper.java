@@ -16,36 +16,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private final Context context;
 
-    interface Tablas
-    {
-        String FAMILIA = "familia";
-        String CATEGORIA = "categoria";
-        String COLOR = "color";
-        String PRODUCTO = "producto";
-        String INVENTARIO = "inventario";
-        String VISTA_REPORTE = "view_reporte";
-    }
-
-    interface Referencias
-    {
-        String ID_FAMILIA = String.format(
-                "REFERENCES %s(%s) ON DELETE CASCADE",
-                Tablas.FAMILIA, Contrato.Familia._ID
-        );
-        String ID_CATEGORIA = String.format(
-                "REFERENCES %s(%s) ON DELETE CASCADE",
-                Tablas.CATEGORIA, Contrato.Categoria._ID
-        );
-        String ID_COLOR = String.format(
-                "REFERENCES %s(%s) ON DELETE CASCADE",
-                Tablas.COLOR, Contrato.Color._ID
-        );
-        String ID_PRODUCTO = String.format(
-                "REFERENCES %s(%s) ON DELETE CASCADE",
-                Tablas.PRODUCTO, Contrato.Producto._ID
-        );
-    }
-
     public DBHelper(Context _context) {
         super(_context, DB_NAME, null, DB_VERSION);
         context = _context;
@@ -61,8 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        try
-        {
+        try {
             database.execSQL(String.format(
                     "CREATE TABLE %s (" +
                             "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -132,9 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     Tablas.INVENTARIO,
                     join_view
             ));
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Log.e("CREATE DB", "onCreate: " + ex.getMessage());
         }
     }
@@ -149,10 +116,36 @@ public class DBHelper extends SQLiteOpenHelper {
             database.execSQL("DROP TABLE IF EXIST " + Tablas.INVENTARIO);
 
             onCreate(database);
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Log.e("UPDATE DB", "onUpgrade: " + ex.getMessage());
         }
+    }
+
+    interface Tablas {
+        String FAMILIA = "familia";
+        String CATEGORIA = "categoria";
+        String COLOR = "color";
+        String PRODUCTO = "producto";
+        String INVENTARIO = "inventario";
+        String VISTA_REPORTE = "view_reporte";
+    }
+
+    interface Referencias {
+        String ID_FAMILIA = String.format(
+                "REFERENCES %s(%s) ON DELETE CASCADE",
+                Tablas.FAMILIA, Contrato.Familia._ID
+        );
+        String ID_CATEGORIA = String.format(
+                "REFERENCES %s(%s) ON DELETE CASCADE",
+                Tablas.CATEGORIA, Contrato.Categoria._ID
+        );
+        String ID_COLOR = String.format(
+                "REFERENCES %s(%s) ON DELETE CASCADE",
+                Tablas.COLOR, Contrato.Color._ID
+        );
+        String ID_PRODUCTO = String.format(
+                "REFERENCES %s(%s) ON DELETE CASCADE",
+                Tablas.PRODUCTO, Contrato.Producto._ID
+        );
     }
 }

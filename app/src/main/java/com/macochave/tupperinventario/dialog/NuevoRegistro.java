@@ -27,15 +27,9 @@ import com.macochave.tupperinventario.datos.tad.TADReporte;
 public class NuevoRegistro extends DialogFragment {
 
     public static final String TAG = "NuevoRegistro";
-
+    NuevoRegistroListener listener;
     private TADReporte reporte;
     private TADInventario inventario;
-
-    NuevoRegistroListener listener;
-
-    public interface NuevoRegistroListener {
-        void possitiveNuevoRegistro(TADReporte reporte);
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,8 +42,7 @@ public class NuevoRegistro extends DialogFragment {
         super.onStart();
 
         Dialog dialog = getDialog();
-        if (dialog != null)
-        {
+        if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             dialog.getWindow().setLayout(width, height);
@@ -67,8 +60,7 @@ public class NuevoRegistro extends DialogFragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null)
-        {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
             actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
@@ -77,7 +69,6 @@ public class NuevoRegistro extends DialogFragment {
 
         return view;
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -88,14 +79,11 @@ public class NuevoRegistro extends DialogFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_aceptar)
-        {
+        if (id == R.id.action_aceptar) {
             Toast.makeText(getContext(), "Acción item", Toast.LENGTH_SHORT).show();
             dismiss();
             return true;
-        }
-        else if (id == android.R.id.home)
-        {
+        } else if (id == android.R.id.home) {
             dismiss();
             return true;
         }
@@ -108,15 +96,17 @@ public class NuevoRegistro extends DialogFragment {
 
         try {
             listener = (NuevoRegistroListener) activity;
-        } catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " debe implementar NuevoRegistroListener");
         }
     }
 
-    public void setRegistro(TADReporte reporte)
-    {
+    public void setRegistro(TADReporte reporte) {
 
+    }
+
+    public interface NuevoRegistroListener {
+        void possitiveNuevoRegistro(TADReporte reporte);
     }
 }

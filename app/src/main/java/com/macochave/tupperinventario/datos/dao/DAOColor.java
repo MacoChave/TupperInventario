@@ -45,8 +45,7 @@ public class DAOColor implements DAO<TADColor> {
         };
         cursor = manager.seleccionar("color", columnas, null, null);
 
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 TADColor familia = new TADColor();
                 familia.setId(cursor.getInt(0));
@@ -64,7 +63,7 @@ public class DAOColor implements DAO<TADColor> {
         long id;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Float.toString(item.getId())};
+        String[] whereArgs = new String[]{Float.toString(item.getId())};
         id = manager.actualizar("color", obtenerValores(item), whereClause, whereArgs);
 
         return id;
@@ -75,7 +74,7 @@ public class DAOColor implements DAO<TADColor> {
         int i;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Float.toString(item.getId())};
+        String[] whereArgs = new String[]{Float.toString(item.getId())};
         i = manager.eliminar("color", whereClause, whereArgs);
 
         return i;
@@ -89,7 +88,7 @@ public class DAOColor implements DAO<TADColor> {
                 "_id"
         };
         String seleccion = "_id = ?";
-        String[] args = new String[] {Float.toString(item.getId())};
+        String[] args = new String[]{Float.toString(item.getId())};
         cursor = manager.seleccionar("color", columnas, seleccion, args);
 
         long id = 0;

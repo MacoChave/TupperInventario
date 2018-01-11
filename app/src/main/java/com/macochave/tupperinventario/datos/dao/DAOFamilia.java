@@ -45,8 +45,7 @@ public class DAOFamilia implements DAO<TADFamilia> {
         };
         cursor = manager.seleccionar("familia", columnas, null, null);
 
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 TADFamilia familia = new TADFamilia();
                 familia.setId(cursor.getInt(0));
@@ -64,7 +63,7 @@ public class DAOFamilia implements DAO<TADFamilia> {
         long id;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Float.toString(item.getId())};
+        String[] whereArgs = new String[]{Float.toString(item.getId())};
         id = manager.actualizar("familia", obtenerValores(item), whereClause, whereArgs);
 
         return id;
@@ -75,7 +74,7 @@ public class DAOFamilia implements DAO<TADFamilia> {
         int i;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Float.toString(item.getId())};
+        String[] whereArgs = new String[]{Float.toString(item.getId())};
         i = manager.eliminar("familia", whereClause, whereArgs);
 
         return i;
@@ -89,7 +88,7 @@ public class DAOFamilia implements DAO<TADFamilia> {
                 "_id"
         };
         String seleccion = "_id = ?";
-        String[] args = new String[] {Float.toString(item.getId())};
+        String[] args = new String[]{Float.toString(item.getId())};
         cursor = manager.seleccionar("familia", columnas, seleccion, args);
 
         long id = 0;

@@ -13,15 +13,14 @@ import android.util.Log;
 
 public class DBManager {
 
-    private DBHelper dbHelper;
     private static SQLiteDatabase database;
+    private DBHelper dbHelper;
 
     public DBManager(Context context) {
         dbHelper = new DBHelper(context);
     }
 
-    public long insertar(String tabla, String nullCollumn, ContentValues values)
-    {
+    public long insertar(String tabla, String nullCollumn, ContentValues values) {
         long id;
         database = dbHelper.getWritableDatabase();
         database.beginTransaction();
@@ -29,8 +28,7 @@ public class DBManager {
         try {
             id = database.insertOrThrow(tabla, nullCollumn, values);
             database.setTransactionSuccessful();
-        }
-        finally {
+        } finally {
             database.endTransaction();
         }
 
@@ -39,8 +37,7 @@ public class DBManager {
         return id;
     }
 
-    public Cursor seleccionar(String tabla, String[] columnas, String seleccion, String[] args)
-    {
+    public Cursor seleccionar(String tabla, String[] columnas, String seleccion, String[] args) {
         Cursor cursor;
         database = dbHelper.getReadableDatabase();
         database.beginTransaction();
@@ -48,8 +45,7 @@ public class DBManager {
         try {
             cursor = database.query(tabla, columnas, seleccion, args, null, null, null);
             database.setTransactionSuccessful();
-        }
-        finally {
+        } finally {
             database.endTransaction();
         }
 
@@ -59,8 +55,7 @@ public class DBManager {
         return cursor;
     }
 
-    public long actualizar(String tabla, ContentValues values, String whereClause, String[] whereArgs)
-    {
+    public long actualizar(String tabla, ContentValues values, String whereClause, String[] whereArgs) {
         long id;
         database = dbHelper.getWritableDatabase();
         database.beginTransaction();
@@ -68,8 +63,7 @@ public class DBManager {
         try {
             id = database.update(tabla, values, whereClause, whereArgs);
             database.setTransactionSuccessful();
-        }
-        finally {
+        } finally {
             database.endTransaction();
         }
 
@@ -78,8 +72,7 @@ public class DBManager {
         return id;
     }
 
-    public int eliminar(String tabla, String whereClause, String[] whereArgs)
-    {
+    public int eliminar(String tabla, String whereClause, String[] whereArgs) {
         int i;
         database = dbHelper.getWritableDatabase();
         database.beginTransaction();
@@ -87,8 +80,7 @@ public class DBManager {
         try {
             i = database.delete(tabla, whereClause, whereArgs);
             database.setTransactionSuccessful();
-        }
-        finally {
+        } finally {
             database.endTransaction();
         }
 

@@ -22,13 +22,8 @@ import com.macochave.tupperinventario.datos.tad.TADFamilia;
 
 public class FamiliaDialog extends DialogFragment {
 
-    private TADFamilia familia;
-
     FamiliaDialogListener listener;
-
-    public interface FamiliaDialogListener {
-        void possitiveFamilia(TADFamilia familia);
-    }
+    private TADFamilia familia;
 
     @NonNull
     @Override
@@ -94,8 +89,11 @@ public class FamiliaDialog extends DialogFragment {
 
     }
 
-    public void setFamilia(TADFamilia familia)
-    {
+    public void setFamilia(TADFamilia familia) {
         this.familia = familia;
+    }
+
+    public interface FamiliaDialogListener {
+        void possitiveFamilia(TADFamilia familia);
     }
 }

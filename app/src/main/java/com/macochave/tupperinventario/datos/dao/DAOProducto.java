@@ -46,8 +46,7 @@ public class DAOProducto implements DAO<TADProducto> {
         };
         cursor = manager.seleccionar("producto", columnas, null, null);
 
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 TADProducto producto = new TADProducto();
                 producto.setId(cursor.getInt(0));
@@ -66,7 +65,7 @@ public class DAOProducto implements DAO<TADProducto> {
         long id;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Float.toString(item.getId())};
+        String[] whereArgs = new String[]{Float.toString(item.getId())};
         id = manager.actualizar("producto", obtenerValores(item), whereClause, whereArgs);
 
         return id;
@@ -77,7 +76,7 @@ public class DAOProducto implements DAO<TADProducto> {
         int i;
 
         String whereClause = "_id = ?";
-        String[] whereArgs = new String[] {Float.toString(item.getId())};
+        String[] whereArgs = new String[]{Float.toString(item.getId())};
         i = manager.eliminar("producto", whereClause, whereArgs);
 
         return i;
@@ -91,7 +90,7 @@ public class DAOProducto implements DAO<TADProducto> {
                 "_id"
         };
         String seleccion = "_id = ?";
-        String[] args = new String[] {Float.toString(item.getId())};
+        String[] args = new String[]{Float.toString(item.getId())};
         cursor = manager.seleccionar("producto", columnas, seleccion, args);
 
         long id = 0;

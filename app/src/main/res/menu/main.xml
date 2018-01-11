@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        app:showAsAction="never"
-        android:icon="@android:drawable/btn_star_big_on"
         android:id="@+id/action_tienda"
-        android:title="@string/action_tienda" />
+        android:icon="@android:drawable/btn_star_big_on"
+        android:title="@string/action_tienda"
+        app:showAsAction="never" />
     <item
-        app:showAsAction="never"
-        android:icon="@android:drawable/stat_sys_download_done"
         android:id="@+id/action_actualizar"
-        android:title="@string/action_actualizar" />
+        android:icon="@android:drawable/stat_sys_download_done"
+        android:title="@string/action_actualizar"
+        app:showAsAction="never" />
     <item
-        app:showAsAction="never"
-        android:icon="@android:drawable/ic_menu_help"
         android:id="@+id/action_ayuda"
-        android:title="@string/action_ayuda" />
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/action_ayuda"
+        app:showAsAction="never" />
     <item
-        app:showAsAction="never"
-        android:icon="@android:drawable/ic_menu_info_details"
         android:id="@+id/action_acerca"
-        android:title="@string/action_info" />
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/action_info"
+        app:showAsAction="never" />
 </menu>

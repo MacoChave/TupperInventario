@@ -22,13 +22,8 @@ import com.macochave.tupperinventario.datos.tad.TADColor;
 
 public class ColorDialog extends DialogFragment {
 
-    private TADColor color;
-
     ColorDialogListener listener;
-
-    public interface ColorDialogListener {
-        void possitiveColor(TADColor color);
-    }
+    private TADColor color;
 
     @NonNull
     @Override
@@ -83,16 +78,17 @@ public class ColorDialog extends DialogFragment {
 
         try {
             listener = (ColorDialogListener) context;
-        }
-        catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-            + " debería implementar ColorDialogListener");
+                    + " debería implementar ColorDialogListener");
         }
     }
 
-    public void setColor(TADColor color)
-    {
+    public void setColor(TADColor color) {
 
+    }
+
+    public interface ColorDialogListener {
+        void possitiveColor(TADColor color);
     }
 }

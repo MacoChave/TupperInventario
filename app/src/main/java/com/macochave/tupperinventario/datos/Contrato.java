@@ -11,29 +11,24 @@ public class Contrato {
     private Contrato() {
     }
 
-    interface ColumnasFamilia
-    {
+    interface ColumnasFamilia {
         String FAMILIA = "familia";
     }
 
-    interface ColumnasCategoria
-    {
+    interface ColumnasCategoria {
         String CATEGORIA = "categoria";
     }
 
-    interface ColumnasColor
-    {
+    interface ColumnasColor {
         String COLOR = "color";
     }
 
-    interface ColumnasProducto
-    {
+    interface ColumnasProducto {
         String PRODUCTO = "producto";
         String PATH_IMAGEN = "path_imagen";
     }
 
-    interface ColumnasInventario
-    {
+    interface ColumnasInventario {
         String ID_FAMILIA = "id_familia";
         String ID_CATEGORIA = "id_categoria";
         String ID_COLOR = "id_color";
@@ -43,9 +38,18 @@ public class Contrato {
         String PRECIO = "precio";
     }
 
-    public static class Familia implements ColumnasFamilia, BaseColumns {}
-    public static class Categoria implements ColumnasCategoria, BaseColumns {}
-    public static class Color implements ColumnasColor, BaseColumns {}
-    public static class Producto implements ColumnasProducto, BaseColumns {}
-    public static class Inventario implements ColumnasInventario, BaseColumns {}
+    public static class Familia implements ColumnasFamilia, BaseColumns {
+    }
+
+    public static class Categoria implements ColumnasCategoria, BaseColumns {
+    }
+
+    public static class Color implements ColumnasColor, BaseColumns {
+    }
+
+    public static class Producto implements ColumnasProducto, BaseColumns {
+    }
+
+    public static class Inventario implements ColumnasInventario, BaseColumns {
+    }
 }
