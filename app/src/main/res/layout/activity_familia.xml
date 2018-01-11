@@ -24,11 +24,11 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:scaleType="center"
                 android:src="@drawable/side_nav_bar"
-                app:layout_collapseMode="parallax"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_familia"
@@ -40,13 +40,11 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <!--<include layout="@layout/content_familia" />-->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lst_familia"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_familia"

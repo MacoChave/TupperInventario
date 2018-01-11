@@ -22,22 +22,6 @@ public class AdaptadorFamilia extends RecyclerView.Adapter<AdaptadorFamilia.Fami
 
     private View.OnClickListener listener;
 
-    public static class FamiliaViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView item;
-
-        public FamiliaViewHolder(View itemView) {
-            super(itemView);
-
-            item = itemView.findViewById(R.id.txt_familia);
-        }
-        public void bindFamilia(TADFamilia familia)
-        {
-            item.setText(familia.getFamilia());
-        }
-
-    }
-
     public AdaptadorFamilia(ArrayList<TADFamilia> familias) {
         this.familias = familias;
     }
@@ -69,8 +53,24 @@ public class AdaptadorFamilia extends RecyclerView.Adapter<AdaptadorFamilia.Fami
 
     @Override
     public void onClick(View view) {
-        if(listener != null)
+        if (listener != null)
             listener.onClick(view);
+    }
+
+    public static class FamiliaViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView item;
+
+        public FamiliaViewHolder(View itemView) {
+            super(itemView);
+
+            item = itemView.findViewById(R.id.txt_lista_familia);
+        }
+
+        public void bindFamilia(TADFamilia familia) {
+            item.setText(familia.getFamilia());
+        }
+
     }
 
     /*

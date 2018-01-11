@@ -3,9 +3,6 @@ package com.macochave.tupperinventario.gestion;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,15 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 
 import com.macochave.tupperinventario.R;
 import com.macochave.tupperinventario.adaptador.AdaptadorFamilia;
-import com.macochave.tupperinventario.datos.Contrato;
-import com.macochave.tupperinventario.datos.DBManager;
 import com.macochave.tupperinventario.datos.dao.DAOFamilia;
 import com.macochave.tupperinventario.datos.tad.TADFamilia;
 import com.macochave.tupperinventario.dialog.FamiliaDialog;
@@ -44,8 +35,8 @@ public class FamiliaActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar_familia);
         setSupportActionBar(toolbar);
 
-        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.toolbar_layout_familia);
-        collapsingToolbarLayout.setTitle("Gestión Familia");
+        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolbar_layout_familia);
+        toolbarLayout.setTitle("Gestión Familia");
 
         FloatingActionButton fab = findViewById(R.id.fab_familia);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +49,6 @@ public class FamiliaActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = findViewById(R.id.lst_familia);
-
         listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
