@@ -37,6 +37,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.macochave.tupperinventario.MainActivity" />
         </activity>
+        <activity
+            android:name=".gestion.ColorActivity"
+            android:label="@string/title_activity_color"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.macochave.tupperinventario.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@ import com.macochave.tupperinventario.dialog.ColorDialog;
 import com.macochave.tupperinventario.dialog.FamiliaDialog;
 import com.macochave.tupperinventario.dialog.NuevoRegistro;
 import com.macochave.tupperinventario.gestion.CategoriaActivity;
+import com.macochave.tupperinventario.gestion.ColorActivity;
 import com.macochave.tupperinventario.gestion.FamiliaActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_producto:
                 break;
             case R.id.nav_color:
+                intent = new Intent(MainActivity.this, ColorActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

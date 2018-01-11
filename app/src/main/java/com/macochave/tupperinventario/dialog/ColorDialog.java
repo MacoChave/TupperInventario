@@ -35,6 +35,10 @@ public class ColorDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_color, null);
 
         final EditText edtColor = view.findViewById(R.id.edtDialog_Color);
+        if (color != null)
+            edtColor.setText(color.getColor());
+        else
+            color = new TADColor();
 
         builder.setView(view);
         builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
@@ -52,13 +56,23 @@ public class ColorDialog extends DialogFragment {
                 ColorDialog.this.getDialog().cancel();
             }
         });
+        builder.setNeutralButton(R.string.eliminar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (color.getId() > 0)
+                    eliminar();
+            }
+        });
         return builder.create();
+    }
+
+    private boolean validarTexto(String s) {
+        return s.isEmpty() || s.matches("( )+");
     }
 
     private void agregar(String s) {
         DAOColor daoColor = new DAOColor(getContext());
-        TADColor color = new TADColor(0, s);
-        color.setId(daoColor.obtenerID(color));
+        color.setColor(s);
 
         if (color.getId() > 0)
             daoColor.actualizar(color);
@@ -68,8 +82,11 @@ public class ColorDialog extends DialogFragment {
         listener.possitiveColor(color);
     }
 
-    private boolean validarTexto(String s) {
-        return s.isEmpty() || s.matches("( )+");
+    private void eliminar() {
+        DAOColor daoColor = new DAOColor(getContext());
+        daoColor.eliminar(color);
+
+        listener.possitiveColor(color);
     }
 
     @Override
@@ -85,7 +102,7 @@ public class ColorDialog extends DialogFragment {
     }
 
     public void setColor(TADColor color) {
-
+        this.color = color;
     }
 
     public interface ColorDialogListener {

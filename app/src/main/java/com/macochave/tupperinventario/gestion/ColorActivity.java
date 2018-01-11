@@ -14,84 +14,83 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
-import com.macochave.tupperinventario.adaptador.AdaptadorCategoria;
-import com.macochave.tupperinventario.datos.dao.DAOCategoria;
-import com.macochave.tupperinventario.datos.tad.TADCategoria;
-import com.macochave.tupperinventario.dialog.CategoriaDialog;
+import com.macochave.tupperinventario.adaptador.AdaptadorColor;
+import com.macochave.tupperinventario.datos.dao.DAOColor;
+import com.macochave.tupperinventario.datos.tad.TADColor;
+import com.macochave.tupperinventario.dialog.ColorDialog;
 
 import java.util.ArrayList;
 
-public class CategoriaActivity extends AppCompatActivity
-    implements CategoriaDialog.CategoriaDialogListener{
+public class ColorActivity extends AppCompatActivity
+    implements ColorDialog.ColorDialogListener {
 
     private RecyclerView listView;
-    private ArrayList<TADCategoria> categorias;
-    private DAOCategoria daoCategoria;
-    private AdaptadorCategoria adaptadorCategoria;
-    private TADCategoria categoria;
+    private ArrayList<TADColor> colors;
+    private DAOColor daoColor;
+    private AdaptadorColor adaptadorColor;
+    private TADColor color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categoria);
-        Toolbar toolbar = findViewById(R.id.toolbar_categoria);
+        setContentView(R.layout.activity_color);
+        Toolbar toolbar = findViewById(R.id.toolbar_color);
         setSupportActionBar(toolbar);
 
-        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolbar_layout_categoria);
-        toolbarLayout.setTitle("Gestión de Categoria");
+        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolbar_layout_color);
+        toolbarLayout.setTitle("Gestión de Color");
 
-        FloatingActionButton fab = findViewById(R.id.fab_categoria);
+        FloatingActionButton fab = findViewById(R.id.fab_color);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                categoria = new TADCategoria();
-                nuevaCategoria();
+                color = new TADColor();
+                nuevoColor();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        listView = findViewById(R.id.lst_categoria);
+        listView = findViewById(R.id.lst_color);
         listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         );
         listView.setItemAnimator(new DefaultItemAnimator());
 
-        daoCategoria = new DAOCategoria(getApplicationContext());
+        daoColor = new DAOColor(getApplicationContext());
 
         llenarLista();
     }
 
     private void llenarLista() {
-        categorias = daoCategoria.seleccionarTodo();
-        adaptadorCategoria = new AdaptadorCategoria(categorias);
-        listView.setAdapter(adaptadorCategoria);
+        colors = daoColor.seleccionarTodo();
+        adaptadorColor = new AdaptadorColor(colors);
+        listView.setAdapter(adaptadorColor);
 
-        adaptadorCategoria.setOnClickListener(new View.OnClickListener() {
+        adaptadorColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                categoria = categorias.get(listView.getChildAdapterPosition(view));
-                nuevaCategoria();
+                color = colors.get(listView.getChildAdapterPosition(view));
+                nuevoColor();
             }
         });
-
     }
 
     private void limpiarLista() {
-        categorias.clear();
-        adaptadorCategoria = null;
+        colors.clear();
+        adaptadorColor = null;
         listView.setAdapter(null);
     }
 
-    private void nuevaCategoria() {
-        CategoriaDialog categoriaDialog = new CategoriaDialog();
-        categoriaDialog.show(getSupportFragmentManager(), "Categoria");
-        categoriaDialog.setCategoria(categoria);
+    private void nuevoColor() {
+        ColorDialog colorDialog = new ColorDialog();
+        colorDialog.show(getSupportFragmentManager(), "Color");
+        colorDialog.setColor(color);
     }
 
     @Override
-    public void possitiveCategoria(TADCategoria categoria) {
-        if (categoria != null) {
+    public void possitiveColor(TADColor color) {
+        if (color != null) {
             limpiarLista();
             llenarLista();
 

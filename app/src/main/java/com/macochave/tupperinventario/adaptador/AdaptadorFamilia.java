@@ -29,7 +29,7 @@ public class AdaptadorFamilia extends RecyclerView.Adapter<AdaptadorFamilia.Fami
     @Override
     public FamiliaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_familia, parent, false);
+                .inflate(R.layout.simple_list_item, parent, false);
 
         view.setOnClickListener(this);
 
@@ -64,7 +64,7 @@ public class AdaptadorFamilia extends RecyclerView.Adapter<AdaptadorFamilia.Fami
         public FamiliaViewHolder(View itemView) {
             super(itemView);
 
-            item = itemView.findViewById(R.id.txt_lista_familia);
+            item = itemView.findViewById(R.id.txt_simple_item);
         }
 
         public void bindFamilia(TADFamilia familia) {
@@ -101,7 +101,7 @@ public class AdaptadorFamilia extends RecyclerView.Adapter<AdaptadorFamilia.Fami
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         assert inflater != null;
-        View v = inflater.inflate(R.layout.item_familia, viewGroup, false);
+        View v = inflater.inflate(R.layout.simple_list_item, viewGroup, false);
 
         TextView familia = v.findViewById(R.id.txt_familia);
         familia.setText(familias.get(i).getFamilia());

@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
 import com.macochave.tupperinventario.adaptador.AdaptadorFamilia;
@@ -36,7 +37,7 @@ public class FamiliaActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolbar_layout_familia);
-        toolbarLayout.setTitle("Gestión Familia");
+        toolbarLayout.setTitle("Gestión de Familia");
 
         FloatingActionButton fab = findViewById(R.id.fab_familia);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +88,14 @@ public class FamiliaActivity extends AppCompatActivity
 
     @Override
     public void possitiveFamilia(TADFamilia familia) {
-        limpiarLista();
-        llenarLista();
+        if (familia != null) {
+            limpiarLista();
+            llenarLista();
+
+            Toast.makeText(this, "Acción realizada con éxito :)", Toast.LENGTH_SHORT).show();
+        }
+        else
+            Toast.makeText(this, "Hubo algún problema :/", Toast.LENGTH_SHORT).show();
     }
 
 }

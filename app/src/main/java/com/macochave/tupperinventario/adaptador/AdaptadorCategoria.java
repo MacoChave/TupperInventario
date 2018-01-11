@@ -1,7 +1,6 @@
 package com.macochave.tupperinventario.adaptador;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ public class AdaptadorCategoria extends RecyclerView.Adapter<AdaptadorCategoria.
 
     public CategoriaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_familia, parent, false);
+                .inflate(R.layout.simple_list_item, parent, false);
 
         view.setOnClickListener(this);
 
@@ -65,7 +64,7 @@ public class AdaptadorCategoria extends RecyclerView.Adapter<AdaptadorCategoria.
         CategoriaViewHolder(View itemView) {
             super(itemView);
 
-            item = itemView.findViewById(R.id.txt_lista_familia);
+            item = itemView.findViewById(R.id.txt_simple_item);
         }
 
         void bindCategoria(TADCategoria categoria) {

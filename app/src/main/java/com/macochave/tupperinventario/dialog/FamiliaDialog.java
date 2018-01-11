@@ -56,8 +56,22 @@ public class FamiliaDialog extends DialogFragment {
                 FamiliaDialog.this.getDialog().cancel();
             }
         });
+        builder.setNeutralButton(R.string.eliminar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (familia.getId() > 0)
+                    eliminar();
+            }
+        });
 
         return builder.create();
+    }
+
+    private void eliminar() {
+        DAOFamilia daoFamilia = new DAOFamilia(getContext());
+        daoFamilia.eliminar(familia);
+
+        listener.possitiveFamilia(familia);
     }
 
     private boolean validarTexto(String s) {

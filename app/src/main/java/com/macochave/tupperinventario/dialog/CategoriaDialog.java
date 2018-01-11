@@ -70,7 +70,7 @@ public class CategoriaDialog extends DialogFragment {
         DAOCategoria daoCategoria = new DAOCategoria(getContext());
         daoCategoria.eliminar(categoria);
 
-        listener.possitiveCategoria(null);
+        listener.possitiveCategoria(categoria);
     }
 
     private void agregar(String s) {
