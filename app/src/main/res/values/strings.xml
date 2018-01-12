@@ -128,4 +128,9 @@
     <string name="title_activity_categoria">CategoriaActivity</string>
     <string name="eliminar">Eliminar</string>
     <string name="title_activity_color">ColorActivity</string>
+    <string name="title_activity_producto">ProductoActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gestion_producto">Gestión de Producto</string>
 </resources>

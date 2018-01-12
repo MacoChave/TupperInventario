@@ -34,7 +34,7 @@ public class FamiliaDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_familia, null);
 
-        final EditText edtFamilia = view.findViewById(R.id.edtDialog_Familia);
+        final EditText edtFamilia = view.findViewById(R.id.edt_dialog_familia);
         if (familia != null)
             edtFamilia.setText(familia.getFamilia());
         else

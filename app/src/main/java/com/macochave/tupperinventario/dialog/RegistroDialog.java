@@ -1,7 +1,7 @@
 package com.macochave.tupperinventario.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -20,14 +20,11 @@ import com.macochave.tupperinventario.R;
 import com.macochave.tupperinventario.datos.tad.TADInventario;
 import com.macochave.tupperinventario.datos.tad.TADReporte;
 
-/**
- * Created by marco on 9/01/18.
- */
+public class RegistroDialog extends DialogFragment {
 
-public class NuevoRegistro extends DialogFragment {
+    public static final String TAG = "RegistroDialog";
+    private RegistroDialogListener listener;
 
-    public static final String TAG = "NuevoRegistro";
-    NuevoRegistroListener listener;
     private TADReporte reporte;
     private TADInventario inventario;
 
@@ -54,8 +51,8 @@ public class NuevoRegistro extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fullscreen_dialog_registro, container, false);
-        Toolbar toolbar = view.findViewById(R.id.toolbar_nuevo_producto);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_registro_dialog, container, false);
+        Toolbar toolbar = view.findViewById(R.id.toolbar_dialog_registro);
         toolbar.setTitle(R.string.registro);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
@@ -80,7 +77,7 @@ public class NuevoRegistro extends DialogFragment {
         int id = item.getItemId();
 
         if (id == R.id.action_aceptar) {
-            Toast.makeText(getContext(), "Acción item", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Aceptar", Toast.LENGTH_SHORT).show();
             dismiss();
             return true;
         } else if (id == android.R.id.home) {
@@ -91,22 +88,21 @@ public class NuevoRegistro extends DialogFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
-        try {
-            listener = (NuevoRegistroListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " debe implementar NuevoRegistroListener");
-        }
+        if (context instanceof RegistroDialogListener)
+            listener = (RegistroDialogListener) context;
+        else
+            throw new RuntimeException(context.toString()
+                + " debe implementar RegistroDialogListener");
     }
 
     public void setRegistro(TADReporte reporte) {
-
+        
     }
 
-    public interface NuevoRegistroListener {
+    public interface RegistroDialogListener {
         void possitiveNuevoRegistro(TADReporte reporte);
     }
 }

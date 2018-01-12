@@ -15,19 +15,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.macochave.tupperinventario.datos.tad.TADCategoria;
-import com.macochave.tupperinventario.datos.tad.TADColor;
-import com.macochave.tupperinventario.datos.tad.TADFamilia;
 import com.macochave.tupperinventario.datos.tad.TADReporte;
-import com.macochave.tupperinventario.dialog.CategoriaDialog;
-import com.macochave.tupperinventario.dialog.ColorDialog;
-import com.macochave.tupperinventario.dialog.FamiliaDialog;
-import com.macochave.tupperinventario.dialog.NuevoRegistro;
+import com.macochave.tupperinventario.dialog.RegistroDialog;
 import com.macochave.tupperinventario.gestion.CategoriaActivity;
 import com.macochave.tupperinventario.gestion.ColorActivity;
 import com.macochave.tupperinventario.gestion.FamiliaActivity;
+import com.macochave.tupperinventario.gestion.ProductoActivity;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, RegistroDialog.RegistroDialogListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +51,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void nuevoRegistro() {
-        NuevoRegistro dialog = new NuevoRegistro();
+        RegistroDialog dialog = new RegistroDialog();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        dialog.show(transaction, NuevoRegistro.TAG);
+        dialog.show(transaction, RegistroDialog.TAG);
     }
 
     @Override
@@ -115,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 break;
             case R.id.nav_producto:
+                intent = new Intent(MainActivity.this, ProductoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_color:
                 intent = new Intent(MainActivity.this, ColorActivity.class);
@@ -129,4 +127,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @Override
+    public void possitiveNuevoRegistro(TADReporte reporte) {
+
+    }
 }

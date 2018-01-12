@@ -34,7 +34,7 @@ public class ColorDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_color, null);
 
-        final EditText edtColor = view.findViewById(R.id.edtDialog_Color);
+        final EditText edtColor = view.findViewById(R.id.edt_dialog_color);
         if (color != null)
             edtColor.setText(color.getColor());
         else

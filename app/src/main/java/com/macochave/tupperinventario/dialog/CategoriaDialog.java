@@ -34,7 +34,7 @@ public class CategoriaDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_categoria, null);
 
-        final EditText edtCategoria = view.findViewById(R.id.edtDialog_Categoria);
+        final EditText edtCategoria = view.findViewById(R.id.edt_dialog_categoria);
         if (categoria.getId() > 0)
             edtCategoria.setText(categoria.getCategoria());
 

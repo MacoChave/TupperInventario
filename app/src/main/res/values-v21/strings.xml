@@ -35,4 +35,5 @@
     <string name="nuevo_color">Nuevo color</string>
     <string name="nuevo_producto">Nuevo producto</string>
     <string name="registro">Registro</string>
+    <string name="gestion_producto">Gestión de Producto</string>
 </resources>

@@ -57,17 +57,17 @@ public class AdaptadorFamilia extends RecyclerView.Adapter<AdaptadorFamilia.Fami
             listener.onClick(view);
     }
 
-    public static class FamiliaViewHolder extends RecyclerView.ViewHolder {
+    static class FamiliaViewHolder extends RecyclerView.ViewHolder {
 
         private TextView item;
 
-        public FamiliaViewHolder(View itemView) {
+        FamiliaViewHolder(View itemView) {
             super(itemView);
 
             item = itemView.findViewById(R.id.txt_simple_item);
         }
 
-        public void bindFamilia(TADFamilia familia) {
+        void bindFamilia(TADFamilia familia) {
             item.setText(familia.getFamilia());
         }
 
