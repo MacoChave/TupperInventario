@@ -36,4 +36,5 @@
     <string name="nuevo_producto">Nuevo producto</string>
     <string name="registro">Registro</string>
     <string name="gestion_producto">Gestión de Producto</string>
+    <string name="seleccion_opcion">Elegir una opción</string>
 </resources>

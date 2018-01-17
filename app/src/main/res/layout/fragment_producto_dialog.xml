@@ -1,24 +1,23 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
     android:background="@drawable/side_nav_bar"
+    android:fitsSystemWindows="false"
     tools:context="com.macochave.tupperinventario.dialog.ProductoDialog">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_dialog_producto"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:fitsSystemWindows="true"
-            android:theme="@style/AppTheme.PopupOverlay" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -46,7 +45,7 @@
             android:src="@drawable/ic_image_primary" />
 
         <EditText
-            android:id="@+id/txt_dialog_producto"
+            android:id="@+id/edt_dialog_producto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

@@ -20,13 +20,24 @@ import com.macochave.tupperinventario.R;
 import com.macochave.tupperinventario.datos.tad.TADInventario;
 import com.macochave.tupperinventario.datos.tad.TADReporte;
 
+import org.w3c.dom.ProcessingInstruction;
+
 public class RegistroDialog extends DialogFragment {
 
+    private static String APP_DIRECTORY = "TupperInventario/";
+    private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";
+
+    private final int MY_PERMISSIONS = 100;
+    private final int PHOTO_CODE = 200;
+    private final int SELECT_PICTURE = 300;
+
     public static final String TAG = "RegistroDialog";
+
     private RegistroDialogListener listener;
 
     private TADReporte reporte;
     private TADInventario inventario;
+    private String path_camera;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +80,7 @@ public class RegistroDialog extends DialogFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.toolbar_menu, menu);
     }
 
