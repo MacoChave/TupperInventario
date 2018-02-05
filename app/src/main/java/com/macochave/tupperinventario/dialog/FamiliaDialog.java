@@ -35,10 +35,8 @@ public class FamiliaDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_familia, null);
 
         final EditText edtFamilia = view.findViewById(R.id.edt_dialog_familia);
-        if (familia != null)
+        if (familia.getId() > 0)
             edtFamilia.setText(familia.getFamilia());
-        else
-            familia = new TADFamilia();
 
         builder.setView(view);
         builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {

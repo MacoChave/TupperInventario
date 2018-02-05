@@ -85,6 +85,7 @@ public class ProductoActivity extends AppCompatActivity
     private void nuevoProducto() {
         ProductoDialog dialog = new ProductoDialog();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        dialog.setProducto(producto);
         dialog.show(transaction, ProductoDialog.TAG);
     }
 

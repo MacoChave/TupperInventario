@@ -12,19 +12,19 @@
         <menu>
             <item
                 android:id="@+id/nav_familia"
-                android:icon="@drawable/ic_edit_black"
+                android:icon="@drawable/ic_familia"
                 android:title="@string/familia" />
             <item
                 android:id="@+id/nav_categoria"
-                android:icon="@drawable/ic_edit_black"
+                android:icon="@drawable/ic_categoria"
                 android:title="@string/categoria" />
             <item
                 android:id="@+id/nav_producto"
-                android:icon="@drawable/ic_edit_black"
+                android:icon="@drawable/ic_producto"
                 android:title="@string/producto" />
             <item
                 android:id="@+id/nav_color"
-                android:icon="@drawable/ic_edit_black"
+                android:icon="@drawable/ic_color"
                 android:title="@string/color" />
             <item
                 android:id="@+id/nav_registro"

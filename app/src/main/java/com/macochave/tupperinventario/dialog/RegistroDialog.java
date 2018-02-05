@@ -14,22 +14,27 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
+import com.macochave.tupperinventario.datos.tad.TADCategoria;
+import com.macochave.tupperinventario.datos.tad.TADColor;
+import com.macochave.tupperinventario.datos.tad.TADFamilia;
 import com.macochave.tupperinventario.datos.tad.TADInventario;
+import com.macochave.tupperinventario.datos.tad.TADProducto;
 import com.macochave.tupperinventario.datos.tad.TADReporte;
 
 import org.w3c.dom.ProcessingInstruction;
 
-public class RegistroDialog extends DialogFragment {
-
-    private static String APP_DIRECTORY = "TupperInventario/";
-    private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";
-
-    private final int MY_PERMISSIONS = 100;
-    private final int PHOTO_CODE = 200;
-    private final int SELECT_PICTURE = 300;
+public class RegistroDialog extends DialogFragment implements
+        CategoriaDialog.CategoriaDialogListener,
+        ColorDialog.ColorDialogListener,
+        FamiliaDialog.FamiliaDialogListener,
+        ProductoDialog.ProductoDialogListener {
 
     public static final String TAG = "RegistroDialog";
 
@@ -37,7 +42,16 @@ public class RegistroDialog extends DialogFragment {
 
     private TADReporte reporte;
     private TADInventario inventario;
-    private String path_camera;
+
+    private EditText text_cantidad;
+    private EditText text_precio;
+    private EditText text_capacidad;
+
+    private Spinner spinner_familia;
+    private Spinner spinner_categoria;
+    private Spinner spinner_color;
+    private Spinner spinner_producto;
+    private Spinner spinner_dimension;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +89,42 @@ public class RegistroDialog extends DialogFragment {
         }
         setHasOptionsMenu(true);
 
+        Spinner spinner_familia = view.findViewById(R.id.spn_registro_familia);
+        Spinner spinner_categoria = view.findViewById(R.id.spn_registro_capacidad);
+        Spinner spinner_color = view.findViewById(R.id.spn_registro_color);
+        Spinner spinner_producto = view.findViewById(R.id.spn_registro_produto);
+        Spinner spinner_dimension;
+
+        Button button_familia = view.findViewById(R.id.btn_registro_familia);
+        Button button_categoria = view.findViewById(R.id.btn_registro_categoria);
+        Button button_color = view.findViewById(R.id.btn_registro_color);
+        Button button_producto = view.findViewById(R.id.btn_registro_producto);
+
+        ImageButton button_aumentar = view.findViewById(R.id.btn_registro_aumentar);
+        button_aumentar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int cantidad = Integer.parseInt(text_cantidad.getText().toString());
+                ++cantidad;
+                text_cantidad.setText(cantidad);
+            }
+        });
+        ImageButton button_reducir = view.findViewById(R.id.btn_registro_reducir);
+        button_reducir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int cantidad = Integer.parseInt(text_cantidad.getText().toString());
+                if (cantidad > 0) {
+                    --cantidad;
+                    text_cantidad.setText(cantidad);
+                }
+            }
+        });
+
+        EditText text_cantidad = view.findViewById(R.id.edt_registro_cantidad);
+        EditText text_precio = view.findViewById(R.id.edt_registro_precio);
+        EditText text_capacidad = view.findViewById(R.id.edt_registro_capacidad);
+
         return view;
     }
 
@@ -89,7 +139,7 @@ public class RegistroDialog extends DialogFragment {
         int id = item.getItemId();
 
         if (id == R.id.action_aceptar) {
-            Toast.makeText(getContext(), "Aceptar", Toast.LENGTH_SHORT).show();
+            agregar();
             dismiss();
             return true;
         } else if (id == android.R.id.home) {
@@ -97,6 +147,10 @@ public class RegistroDialog extends DialogFragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void agregar() {
+
     }
 
     @Override
@@ -111,7 +165,31 @@ public class RegistroDialog extends DialogFragment {
     }
 
     public void setRegistro(TADReporte reporte) {
-        
+        this.reporte = reporte;
+    }
+
+    @Override
+    public void possitiveColor(TADColor color) {
+        if (color != null)
+            inventario.setId_color(color.getId());
+    }
+
+    @Override
+    public void possitiveFamilia(TADFamilia familia) {
+        if (familia != null)
+            inventario.setId_familia(familia.getId());
+    }
+
+    @Override
+    public void possitiveCategoria(TADCategoria categoria) {
+        if (categoria != null)
+            inventario.setId_categoria(categoria.getId());
+    }
+
+    @Override
+    public void possitiveProducto(TADProducto producto) {
+        if (producto != null)
+            inventario.setId_producto(producto.getId());
     }
 
     public interface RegistroDialogListener {

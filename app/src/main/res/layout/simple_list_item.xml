@@ -8,7 +8,7 @@
         android:id="@+id/txt_simple_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/familia"
+        android:hint="@string/item"
         android:padding="@dimen/fab_margin"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 

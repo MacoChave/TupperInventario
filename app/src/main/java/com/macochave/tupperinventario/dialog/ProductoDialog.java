@@ -19,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -37,9 +38,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
+import com.macochave.tupperinventario.datos.dao.DAOProducto;
 import com.macochave.tupperinventario.datos.tad.TADProducto;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -53,7 +58,6 @@ public class ProductoDialog extends DialogFragment {
     private final int SELECT_PICTURE = 300;
 
     public static final String TAG = "ProductoDialog";
-    private static final int PICK_IMAGE_REQUEST = 1;
 
     private ProductoDialogListener listener;
 
@@ -68,6 +72,9 @@ public class ProductoDialog extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialogStyle);
+
+        if (savedInstanceState != null)
+            path_camera = savedInstanceState.getString("file_path");
     }
 
     @Override
@@ -104,6 +111,11 @@ public class ProductoDialog extends DialogFragment {
         imagenProducto = view.findViewById(R.id.img_dialog_producto);
         ImageButton buscarImagen = view.findViewById(R.id.btn_dialog_producto);
 
+        if (producto.getId() > 0) {
+            nombreProducto.setText(producto.getProducto());
+            imagenProducto.setImageURI(Uri.parse(producto.getPath_imagen()));
+        }
+
         buscarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +137,10 @@ public class ProductoDialog extends DialogFragment {
         int id = item.getItemId();
 
         if (id == R.id.action_aceptar) {
-            Toast.makeText(getContext(), "Aceptar", Toast.LENGTH_SHORT).show();
+            if (validarTexto(nombreProducto.getText().toString()))
+                Toast.makeText(getContext(), "No admito entradas vacías :)", Toast.LENGTH_SHORT).show();
+            else
+                agregar(nombreProducto.getText().toString());
             dismiss();
             return true;
         } else if (id == android.R.id.home) {
@@ -134,6 +149,22 @@ public class ProductoDialog extends DialogFragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void agregar(String s) {
+        DAOProducto daoProducto = new DAOProducto(getContext());
+        producto.setProducto(s);
+
+        if (producto.getId() > 0)
+            daoProducto.actualizar(producto);
+        else
+            daoProducto.agregar(producto);
+
+        listener.possitiveProducto(producto);
+    }
+
+    private boolean validarTexto(String s) {
+        return s.matches("( )+") || s.isEmpty();
     }
 
     @Override
@@ -240,13 +271,6 @@ public class ProductoDialog extends DialogFragment {
         outState.putString("file_path", path_camera);
     }
 
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-        path_camera = savedInstanceState != null ? savedInstanceState.getString("file_path") : null;
-    }
-
     private void abrirGaleria() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -256,7 +280,56 @@ public class ProductoDialog extends DialogFragment {
 
     private void abrirCamara() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, PHOTO_CODE);
+        Toast.makeText(getContext(), "Intent creado", Toast.LENGTH_SHORT).show();
+        // Ensure that there's a camera activity to handle the intent
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            photoFile = createImageFile();
+            Toast.makeText(getContext(), "Archivo creado", Toast.LENGTH_SHORT).show();
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(getContext(),
+                        "com.macochave.tupperinventario",
+                        photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(intent, SELECT_PICTURE);
+                Toast.makeText(getContext(), "Foto tomada", Toast.LENGTH_SHORT).show();
+            }
+        }
+        galleryAddPic();
+    }
+
+    private File createImageFile() {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = null;
+        try {
+            image = File.createTempFile(
+                    imageFileName,  /* prefix */
+                    ".jpg",         /* suffix */
+                    storageDir      /* directory */
+            );
+            Log.d("TEMP FILE", "createImageFile: SE CREÓ ARCHIVO TEMPORAL. " + storageDir.getPath());
+        } catch (IOException e) {
+            Log.d("TEMP FILE", "createImageFile: NO SE CREÓ ARCHIVO TEMPORAL. " + e.getMessage());
+        }
+
+        // Save a file: path for use with ACTION_VIEW intents
+        path_camera = image != null ? image.getAbsolutePath() : null;
+
+        return image;
+    }
+
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(path_camera);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        getContext().sendBroadcast(mediaScanIntent);
+        Toast.makeText(getContext(), "Imagen escaneada", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -267,15 +340,16 @@ public class ProductoDialog extends DialogFragment {
             switch (requestCode) {
                 case PHOTO_CODE:
                     Bundle extras = data.getExtras();
-                    Bitmap bitmap = (Bitmap) extras.get("data");
+                    Bitmap bitmap = (Bitmap) (extras != null ? extras.get("data") : null);
                     imagenProducto.setImageBitmap(bitmap);
                     break;
                 case SELECT_PICTURE:
                     if (data != null && data.getData() != null) {
                         imageUri = data.getData();
                         imagenProducto.setImageURI(imageUri);
-                        Toast.makeText(getContext(), "Path: " + imageUri.getPath(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(), getFileExtension(imageUri), Toast.LENGTH_SHORT).show();
+                        String path_original_image = obtenerRealPath(imageUri);
+                        Toast.makeText(getContext(), path_original_image, Toast.LENGTH_SHORT).show();
+                        producto.setPath_imagen(path_original_image);
                     }
                     else
                         Log.d("CHOOSE FILE", "onActivityResult: No hay data");
@@ -286,12 +360,30 @@ public class ProductoDialog extends DialogFragment {
         }
     }
 
-    private String getFileExtension(Uri imageUri) {
-        ContentResolver resolver;
-        resolver = getActivity().getContentResolver();
-        MimeTypeMap map = MimeTypeMap.getSingleton();
+    private boolean moverImagen(String path_original_image) {
 
-        return map.getExtensionFromMimeType(resolver.getType(imageUri));
+        return false;
+    }
+
+    private String obtenerRealPath(Uri uri) {
+        /*
+        * ruta de imagenes desde CONTENT_MEDIA
+        * EXTERNA		-> /document/67FD-08F9:DCIM/100ANDRO/imagen.jpg -> /storage/67FD-08F9/DCIM/100ANDRO/imagen.jpg
+        * GALERIA		-> /external/images/media/11041
+        * GOOGLE FOTOS-> /0/1/mediakey:/local%3A182570bd-9483-47a7-a54b-16b06e2ddc0c/ORIGINAL/NONE/1129177897
+        * INTERNA		-> /document/primary:WhatsApp/Media/.Statuses/imagen.jpg -> /storage/emulated/0/WhatsApp/Media/.Statuses/imagen.jpg
+        *
+        * EXTERNA 	-> /document/67FD-08F9: 	a -> /storage/67FC-089/
+        * INTERNA 	-> /document/primary:	 	a -> /storage/emulated/0/
+        * */
+        String path = uri.getPath();
+
+        if (path.startsWith("/document/primary:")) {
+            return path.replace("/document/primary:", "/storage/emulated/0/");
+        }
+        else {
+            return path.replace("/document/67FD-08F9:", "/storage/67FC-089/");
+        }
     }
 
     public interface ProductoDialogListener {

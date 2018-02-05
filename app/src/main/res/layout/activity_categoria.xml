@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/background_1"
+                android:contentDescription="@string/gestion"
                 android:scaleType="fitEnd"
                 android:src="@drawable/imagen_categoria"
                 app:layout_collapseMode="parallax" />

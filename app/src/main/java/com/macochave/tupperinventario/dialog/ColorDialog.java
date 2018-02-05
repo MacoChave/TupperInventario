@@ -35,10 +35,8 @@ public class ColorDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_color, null);
 
         final EditText edtColor = view.findViewById(R.id.edt_dialog_color);
-        if (color != null)
+        if (color.getId() > 0)
             edtColor.setText(color.getColor());
-        else
-            color = new TADColor();
 
         builder.setView(view);
         builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {

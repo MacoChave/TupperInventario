@@ -2,7 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/side_nav_bar"
+    android:background="#FFFFFF"
     android:fitsSystemWindows="false">
 
     <android.support.design.widget.AppBarLayout
@@ -16,7 +16,211 @@
             android:layout_height="?attr/actionBarSize"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark" />
-
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/familia"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Spinner
+                android:id="@+id/spn_registro_familia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin" />
+
+            <Button
+                android:id="@+id/btn_registro_familia"
+                android:layout_width="@dimen/nav_header_height"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/fab_margin"
+                android:background="@drawable/boton_flat"
+                android:text="@string/nueva_familia"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/categoria"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Spinner
+                android:id="@+id/spn_registro_categoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin" />
+
+            <Button
+                android:id="@+id/btn_registro_categoria"
+                android:layout_width="@dimen/nav_header_height"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/fab_margin"
+                android:background="@drawable/boton_flat"
+                android:text="@string/nueva_categoria"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/registro"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Spinner
+                android:id="@+id/spn_registro_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin" />
+
+            <Button
+                android:id="@+id/btn_registro_color"
+                android:layout_width="@dimen/nav_header_height"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/fab_margin"
+                android:background="@drawable/boton_flat"
+                android:text="@string/nuevo_color"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/producto"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Spinner
+                android:id="@+id/spn_registro_produto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin" />
+
+            <ImageView
+                android:id="@+id/img_registro_producto"
+                android:layout_width="@dimen/imagen"
+                android:layout_height="@dimen/imagen"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/fab_margin" />
+
+            <Button
+                android:id="@+id/btn_registro_producto"
+                android:layout_width="@dimen/nav_header_height"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/fab_margin"
+                android:background="@drawable/boton_flat"
+                android:text="@string/nuevo_producto"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/existencia"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_registro_reducir"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:contentDescription="@string/restar_existencia"
+                    android:src="@drawable/ic_remove_white" />
+
+                <EditText
+                    android:id="@+id/edt_registro_cantidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:singleLine="false"
+                    android:text="@string/cantidad"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+                <ImageButton
+                    android:id="@+id/btn_registro_aumentar"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="17dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:contentDescription="@string/aumentar_existencia"
+                    android:src="@drawable/ic_add_white" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/precio"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+            <EditText
+                android:id="@+id/edt_registro_precio"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/fab_margin"
+                android:gravity="center"
+                android:hint="@string/valor_monetario"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_margin="@dimen/fab_margin"
+                android:text="@string/capacidad"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/fab_margin"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edt_registro_capacidad"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/colorPrimary" />
+
+                <Spinner
+                    android:id="@+id/spn_registro_capacidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
