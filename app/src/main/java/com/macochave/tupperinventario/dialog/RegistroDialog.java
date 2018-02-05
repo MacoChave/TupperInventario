@@ -18,17 +18,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
+import com.macochave.tupperinventario.datos.dao.DAOCategoria;
+import com.macochave.tupperinventario.datos.dao.DAOColor;
+import com.macochave.tupperinventario.datos.dao.DAOFamilia;
+import com.macochave.tupperinventario.datos.dao.DAOProducto;
 import com.macochave.tupperinventario.datos.tad.TADCategoria;
 import com.macochave.tupperinventario.datos.tad.TADColor;
 import com.macochave.tupperinventario.datos.tad.TADFamilia;
 import com.macochave.tupperinventario.datos.tad.TADInventario;
 import com.macochave.tupperinventario.datos.tad.TADProducto;
 import com.macochave.tupperinventario.datos.tad.TADReporte;
-
-import org.w3c.dom.ProcessingInstruction;
 
 public class RegistroDialog extends DialogFragment implements
         CategoriaDialog.CategoriaDialogListener,
@@ -40,8 +41,12 @@ public class RegistroDialog extends DialogFragment implements
 
     private RegistroDialogListener listener;
 
-    private TADReporte reporte;
+    private TADFamilia familia;
+    private TADCategoria categoria;
+    private TADColor color;
+    private TADProducto producto;
     private TADInventario inventario;
+    private TADReporte reporte;
 
     private EditText text_cantidad;
     private EditText text_precio;
@@ -149,10 +154,6 @@ public class RegistroDialog extends DialogFragment implements
         return super.onOptionsItemSelected(item);
     }
 
-    private void agregar() {
-
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -162,6 +163,30 @@ public class RegistroDialog extends DialogFragment implements
         else
             throw new RuntimeException(context.toString()
                 + " debe implementar RegistroDialogListener");
+    }
+
+    private void agregar() {
+
+    }
+
+    private void llenarSpinnerFamilia() {
+        DAOFamilia daoFamilia = new DAOFamilia(getContext());
+    }
+
+    private void llenarSpinnerCategoria() {
+        DAOCategoria daoCategoria = new DAOCategoria(getContext());
+    }
+
+    private void llenarSpinnerColor() {
+        DAOColor daoColor = new DAOColor(getContext());
+    }
+
+    private void llenarSpinnerProducto() {
+        DAOProducto daoProducto = new DAOProducto(getContext());
+    }
+
+    private void llenarSpinnerCapacidad() {
+
     }
 
     public void setRegistro(TADReporte reporte) {

@@ -3,7 +3,6 @@ package com.macochave.tupperinventario.gestion;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.macochave.tupperinventario.R;
-import com.macochave.tupperinventario.adaptador.AdaptadorProducto;
+import com.macochave.tupperinventario.holder.HolderProducto;
 import com.macochave.tupperinventario.datos.dao.DAOProducto;
 import com.macochave.tupperinventario.datos.tad.TADProducto;
 import com.macochave.tupperinventario.dialog.ProductoDialog;
@@ -27,7 +26,7 @@ public class ProductoActivity extends AppCompatActivity
     private RecyclerView listView;
     private ArrayList<TADProducto> productos;
     private DAOProducto daoProducto;
-    private AdaptadorProducto adaptadorProducto;
+    private HolderProducto holderProducto;
     private TADProducto producto;
 
     @Override
@@ -64,10 +63,10 @@ public class ProductoActivity extends AppCompatActivity
 
     private void llenarLista() {
         productos = daoProducto.seleccionarTodo();
-        adaptadorProducto = new AdaptadorProducto(productos);
-        listView.setAdapter(adaptadorProducto);
+        holderProducto = new HolderProducto(productos);
+        listView.setAdapter(holderProducto);
 
-        adaptadorProducto.setOnClickListener(new View.OnClickListener() {
+        holderProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 producto = productos.get(listView.getChildAdapterPosition(view));
@@ -78,7 +77,7 @@ public class ProductoActivity extends AppCompatActivity
 
     private void limpiarLista() {
         productos.clear();
-        adaptadorProducto = null;
+        holderProducto = null;
         listView.setAdapter(null);
     }
 

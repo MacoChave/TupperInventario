@@ -3,7 +3,6 @@ package com.macochave.tupperinventario.gestion;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
-import com.macochave.tupperinventario.adaptador.AdaptadorColor;
+import com.macochave.tupperinventario.holder.HolderColor;
 import com.macochave.tupperinventario.datos.dao.DAOColor;
 import com.macochave.tupperinventario.datos.tad.TADColor;
 import com.macochave.tupperinventario.dialog.ColorDialog;
@@ -27,7 +26,7 @@ public class ColorActivity extends AppCompatActivity
     private RecyclerView listView;
     private ArrayList<TADColor> colors;
     private DAOColor daoColor;
-    private AdaptadorColor adaptadorColor;
+    private HolderColor holderColor;
     private TADColor color;
 
     @Override
@@ -64,10 +63,10 @@ public class ColorActivity extends AppCompatActivity
 
     private void llenarLista() {
         colors = daoColor.seleccionarTodo();
-        adaptadorColor = new AdaptadorColor(colors);
-        listView.setAdapter(adaptadorColor);
+        holderColor = new HolderColor(colors);
+        listView.setAdapter(holderColor);
 
-        adaptadorColor.setOnClickListener(new View.OnClickListener() {
+        holderColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 color = colors.get(listView.getChildAdapterPosition(view));
@@ -78,7 +77,7 @@ public class ColorActivity extends AppCompatActivity
 
     private void limpiarLista() {
         colors.clear();
-        adaptadorColor = null;
+        holderColor = null;
         listView.setAdapter(null);
     }
 

@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
-import com.macochave.tupperinventario.adaptador.AdaptadorFamilia;
+import com.macochave.tupperinventario.holder.HolderFamilia;
 import com.macochave.tupperinventario.datos.dao.DAOFamilia;
 import com.macochave.tupperinventario.datos.tad.TADFamilia;
 import com.macochave.tupperinventario.dialog.FamiliaDialog;
@@ -26,7 +26,7 @@ public class FamiliaActivity extends AppCompatActivity
     private RecyclerView listView;
     private ArrayList<TADFamilia> familias;
     private DAOFamilia daoFamilia;
-    private AdaptadorFamilia adaptadorFamilia;
+    private HolderFamilia holderFamilia;
     private TADFamilia familia;
 
     @Override
@@ -62,10 +62,10 @@ public class FamiliaActivity extends AppCompatActivity
 
     private void llenarLista() {
         familias = daoFamilia.seleccionarTodo();
-        adaptadorFamilia = new AdaptadorFamilia(familias);
-        listView.setAdapter(adaptadorFamilia);
+        holderFamilia = new HolderFamilia(familias);
+        listView.setAdapter(holderFamilia);
 
-        adaptadorFamilia.setOnClickListener(new View.OnClickListener() {
+        holderFamilia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 familia = familias.get(listView.getChildAdapterPosition(view));
@@ -76,7 +76,7 @@ public class FamiliaActivity extends AppCompatActivity
 
     private void limpiarLista() {
         familias.clear();
-        adaptadorFamilia = null;
+        holderFamilia = null;
         listView.setAdapter(null);
     }
 

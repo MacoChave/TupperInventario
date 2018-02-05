@@ -1,4 +1,4 @@
-package com.macochave.tupperinventario.adaptador;
+package com.macochave.tupperinventario.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,14 +14,14 @@ import java.util.ArrayList;
  * Created by marco on 12/01/18.
  */
 
-public class AdaptadorChooser extends RecyclerView.Adapter<AdaptadorChooser.ChooserViewHolder>
+public class HolderChooser extends RecyclerView.Adapter<HolderChooser.ChooserViewHolder>
     implements View.OnClickListener {
 
     private ArrayList<URI> uris;
 
     private View.OnClickListener listener;
 
-    public AdaptadorChooser(ArrayList<URI> uris) {
+    public HolderChooser(ArrayList<URI> uris) {
         this.uris = uris;
     }
 

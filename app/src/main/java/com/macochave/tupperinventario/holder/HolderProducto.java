@@ -1,4 +1,4 @@
-package com.macochave.tupperinventario.adaptador;
+package com.macochave.tupperinventario.holder;
 
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -17,14 +17,14 @@ import java.util.ArrayList;
  * Created by marco on 11/01/18.
  */
 
-public class AdaptadorProducto extends RecyclerView.Adapter<AdaptadorProducto.ProductoViewHolder>
+public class HolderProducto extends RecyclerView.Adapter<HolderProducto.ProductoViewHolder>
     implements View.OnClickListener {
 
     private ArrayList<TADProducto> productos;
 
     private View.OnClickListener listener;
 
-    public AdaptadorProducto(ArrayList<TADProducto> productos) {
+    public HolderProducto(ArrayList<TADProducto> productos) {
         this.productos = productos;
     }
 

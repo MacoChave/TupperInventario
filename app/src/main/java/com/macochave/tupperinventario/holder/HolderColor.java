@@ -1,4 +1,4 @@
-package com.macochave.tupperinventario.adaptador;
+package com.macochave.tupperinventario.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,22 +9,20 @@ import android.widget.TextView;
 import com.macochave.tupperinventario.R;
 import com.macochave.tupperinventario.datos.tad.TADColor;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /**
  * Created by marco on 10/01/18.
  */
 
-public class AdaptadorColor extends RecyclerView.Adapter<AdaptadorColor.ColorViewHolder>
+public class HolderColor extends RecyclerView.Adapter<HolderColor.ColorViewHolder>
     implements View.OnClickListener {
 
     private ArrayList<TADColor> colors;
 
     private View.OnClickListener listener;
 
-    public AdaptadorColor(ArrayList<TADColor> colors) {
+    public HolderColor(ArrayList<TADColor> colors) {
         this.colors = colors;
     }
 

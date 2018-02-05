@@ -3,7 +3,6 @@ package com.macochave.tupperinventario.gestion;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.macochave.tupperinventario.R;
-import com.macochave.tupperinventario.adaptador.AdaptadorCategoria;
+import com.macochave.tupperinventario.holder.HolderCategoria;
 import com.macochave.tupperinventario.datos.dao.DAOCategoria;
 import com.macochave.tupperinventario.datos.tad.TADCategoria;
 import com.macochave.tupperinventario.dialog.CategoriaDialog;
@@ -27,7 +26,7 @@ public class CategoriaActivity extends AppCompatActivity
     private RecyclerView listView;
     private ArrayList<TADCategoria> categorias;
     private DAOCategoria daoCategoria;
-    private AdaptadorCategoria adaptadorCategoria;
+    private HolderCategoria holderCategoria;
     private TADCategoria categoria;
 
     @Override
@@ -64,10 +63,10 @@ public class CategoriaActivity extends AppCompatActivity
 
     private void llenarLista() {
         categorias = daoCategoria.seleccionarTodo();
-        adaptadorCategoria = new AdaptadorCategoria(categorias);
-        listView.setAdapter(adaptadorCategoria);
+        holderCategoria = new HolderCategoria(categorias);
+        listView.setAdapter(holderCategoria);
 
-        adaptadorCategoria.setOnClickListener(new View.OnClickListener() {
+        holderCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 categoria = categorias.get(listView.getChildAdapterPosition(view));
@@ -79,7 +78,7 @@ public class CategoriaActivity extends AppCompatActivity
 
     private void limpiarLista() {
         categorias.clear();
-        adaptadorCategoria = null;
+        holderCategoria = null;
         listView.setAdapter(null);
     }
 
